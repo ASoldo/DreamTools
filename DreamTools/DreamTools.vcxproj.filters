@@ -27,9 +27,15 @@
     <ClInclude Include="src\DreamTools\EntryPoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DreamTools\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

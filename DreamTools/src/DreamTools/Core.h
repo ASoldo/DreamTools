@@ -7,5 +7,5 @@
 		#define DREAMTOOLS_API __declspec(dllimport)
 	#endif
 #else
-	#error DreamTools only support Windows!
+	#error DreamTools only supports Windows!
 #endif

@@ -59,8 +59,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DT_BUILD_DLL;DT_PLATFORM_WINDOWS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DreamToolsProject\DreamTools\DreamTools\vendor\spdlog\include\spdlog</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -75,8 +74,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>DT_BUILD_DLL;DT_PLATFORM_WINDOW;SNDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\DreamToolsProject\DreamTools\DreamTools\vendor\spdlog\include\spdlog</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -86,12 +84,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\DreamTools\Log.h" />
     <ClInclude Include="src\DreamTools\Application.h" />
     <ClInclude Include="src\DreamTools\Core.h" />
     <ClInclude Include="src\DreamTools.h" />
     <ClInclude Include="src\DreamTools\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DreamTools\Log.cpp" />
     <ClCompile Include="src\DreamTools\Application.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
