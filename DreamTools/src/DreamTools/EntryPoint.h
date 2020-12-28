@@ -7,11 +7,10 @@
 	int main(int argc, char** argv)
 	{
 		DreamTools::Log::Init();
-		DreamTools::Log::GetCoreLogger()->warn("DreamTools Initialized!");
-		DreamTools::Log::GetClientLogger()->info("App Initialized!");
-		DreamTools::Log::GetClientLogger()->info(DT_USERNAME);
+		DT_CORE_WARN("DreamTools Initialized!");
+		DT_CLIENT_INFO("App Initialized!");
+		DT_CORE_WARN(DT_USERNAME);
 		
-
 		auto app = DreamTools::CreateApplication();
 	
 		app->Run();
