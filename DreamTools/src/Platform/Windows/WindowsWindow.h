@@ -24,7 +24,7 @@ namespace DreamTools
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 	private:
-		GLFWwindow* m_WIndow;
+		GLFWwindow* m_Window;
 
 		struct WindowData
 		{

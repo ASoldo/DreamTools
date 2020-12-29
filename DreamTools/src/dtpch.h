@@ -15,6 +15,7 @@
 #include <unordered_set>
 
 #include "DreamTools/Log.h"
+#include <bitset>
 
 #ifdef DT_PLATFORM_WINDOWS
 	#include <Windows.h>
