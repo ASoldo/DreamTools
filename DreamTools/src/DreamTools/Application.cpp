@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "Events/ApplicationEvent.h"
+#include "Events/Event.h"
 #include "Log.h"
 
 namespace DreamTools
@@ -7,7 +8,7 @@ namespace DreamTools
 
 	Application::Application()
 	{
-
+		
 	}
 
 	Application::~Application()
@@ -17,8 +18,9 @@ namespace DreamTools
 
 	void Application::Run()
 	{
-		WindowResizeEvent e(1024, 768);
-		DT_CLIENT_TRACE(e);
+		WindowResizeEvent e(1280, 720);
+		DT_CORE_TRACE(e);
+
 		while (true)
 		{
 

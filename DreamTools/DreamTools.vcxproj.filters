@@ -4,6 +4,12 @@
     <Filter Include="DreamTools">
       <UniqueIdentifier>{DFDB218D-CB93-63DA-349B-3C362072FECA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DreamTools\Core">
+      <UniqueIdentifier>{97432ACF-03CF-9793-0CE0-1A8878EAF393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DreamTools\Events">
+      <UniqueIdentifier>{E396EB47-4FAD-E9DD-9824-75FF047ABA65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DreamTools.h" />
@@ -13,19 +19,33 @@
     <ClInclude Include="src\DreamTools\Core.h">
       <Filter>DreamTools</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Core\Base.h">
+      <Filter>DreamTools\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Core\KeyCodes.h">
+      <Filter>DreamTools\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Core\MouseCodes.h">
+      <Filter>DreamTools\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\DreamTools\EntryPoint.h">
       <Filter>DreamTools</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Events\ApplicationEvent.h">
+      <Filter>DreamTools\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Events\Event.h">
+      <Filter>DreamTools\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Events\KeyEvent.h">
+      <Filter>DreamTools\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Events\MouseEvent.h">
+      <Filter>DreamTools\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\DreamTools\Log.h">
       <Filter>DreamTools</Filter>
     </ClInclude>
-    <ClInclude Include="src\DreamTools\Events\Event.h" />
-    <ClInclude Include="src\DreamTools\Events\KeyEvent.h" />
-    <ClInclude Include="src\DreamTools\Events\MouseEvent.h" />
-    <ClInclude Include="src\DreamTools\Events\ApplicationEvent.h" />
-    <ClInclude Include="src\DreamTools\Core\Base.h" />
-    <ClInclude Include="src\DreamTools\Core\KeyCodes.h" />
-    <ClInclude Include="src\DreamTools\Core\MouseCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Application.cpp">

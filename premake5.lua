@@ -14,8 +14,8 @@ project "DreamTools"
 	kind "SharedLib"
 	language "C++"
 
-	target = ("bin/" .. outputdir .. "/DreamTools")
-	objdir = ("bin-int/" .. outputdir .. "/DreamTools")
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
@@ -64,8 +64,8 @@ project "DreamTools"
 		kind "ConsoleApp"
 		language "C++"
 
-		target = "bin/" .. outputdir .. "/DreamTools}"
-		objdir = ("bin-int/" .. outputdir .. "/DreamTools")
+		targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+		objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
