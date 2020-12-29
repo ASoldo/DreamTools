@@ -1,3 +1,4 @@
+#include "dtpch.h"
 #include "Log.h"
 
 namespace DreamTools

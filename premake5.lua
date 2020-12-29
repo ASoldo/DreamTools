@@ -17,6 +17,9 @@ project "DreamTools"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "dtpch.h"
+	pchsource "DreamTools/src/dtpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",

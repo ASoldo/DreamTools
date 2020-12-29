@@ -2,9 +2,6 @@
 #include "../Core.h"
 #include "../Core/Base.h"
 
-#include <string>
-#include <functional>
-
 namespace DreamTools
 {
 	enum class EventType

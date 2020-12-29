@@ -3,7 +3,6 @@
 #include "Core.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
-#include <memory>
 #include "spdlog/fmt/ostr.h"
 
 namespace DreamTools
