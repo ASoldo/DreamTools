@@ -12,7 +12,10 @@ workspace "DreamTools"
 	-- Include Directories relative to root (Solution Directory)
 	IncludeDir = {}
 	IncludeDir["GLFW"] = "DreamTools/vendor/GFLW/Include"
+	IncludeDir["GLAD"] = "DreamTools/vendor/GLAD/Include"
+
 	include "DreamTools/vendor/GLFW"
+	include "DreamTools/vendor/GLAD"
 
 project "DreamTools"
 	location "DreamTools"
@@ -35,12 +38,14 @@ project "DreamTools"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.GLAD}"
 	}
 
 	links
 	{
 		"GLFW",
+		"GLAD",
 		"opengl32.lib"
 	}
 
@@ -52,7 +57,8 @@ project "DreamTools"
 	defines
 	{
 		"DT_PLATFORM_WINDOWS",
-		"DT_BUILD_DLL"
+		"DT_BUILD_DLL",
+		"GLFW_INCLUDE_NONE"
 	}
 
 	postbuildcommands

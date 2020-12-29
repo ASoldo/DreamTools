@@ -2,7 +2,8 @@
 #include "Application.h"
 #include "Events/ApplicationEvent.h"
 #include "Events/Event.h"
-#include "../vendor/GLFW/include/GLFW/glfw3.h"
+//#include "../vendor/GLFW/include/GLFW/glfw3.h"
+#include <glad/glad.h>
 
 
 namespace DreamTools

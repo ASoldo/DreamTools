@@ -3,6 +3,8 @@
 #include "DreamTools/Window.h"
 #include "../vendor/GLFW/include/GLFW/glfw3.h"
 
+struct GLFWWindow;
+
 namespace DreamTools
 {
 	class WindowsWindow : public Window
