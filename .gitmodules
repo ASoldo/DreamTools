@@ -1,3 +1,9 @@
 [submodule "DreamTools/vendor/spdlog"]
 	path = DreamTools/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "glfw"]
+	path = glfw
+	url = https://github.com/TheCherno/glfw
+[submodule "DreamTools/vendor/GLFW"]
+	path = DreamTools/vendor/GLFW
+	url = https://github.com/TheCherno/glfw

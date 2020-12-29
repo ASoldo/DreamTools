@@ -10,6 +10,12 @@
     <Filter Include="DreamTools\Events">
       <UniqueIdentifier>{E396EB47-4FAD-E9DD-9824-75FF047ABA65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DreamTools.h" />
@@ -46,6 +52,12 @@
     <ClInclude Include="src\DreamTools\Log.h">
       <Filter>DreamTools</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Window.h">
+      <Filter>DreamTools</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\dtpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +66,9 @@
     </ClCompile>
     <ClCompile Include="src\DreamTools\Log.cpp">
       <Filter>DreamTools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\dtpch.cpp" />
   </ItemGroup>

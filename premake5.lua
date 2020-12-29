@@ -9,6 +9,11 @@ workspace "DreamTools"
 	}
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+	-- Include Directories relative to root (Solution Directory)
+	IncludeDir = {}
+	IncludeDir["GLFW"] = "DreamTools/vendor/GFLW/Include"
+	include "DreamTools/vendor/GLFW"
+
 project "DreamTools"
 	location "DreamTools"
 	kind "SharedLib"
@@ -28,7 +33,15 @@ project "DreamTools"
  
 	includedirs
 	{
-		"DreamTools/vendor/spdlog/include"
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
