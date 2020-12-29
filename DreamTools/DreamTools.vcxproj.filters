@@ -49,6 +49,12 @@
     <ClInclude Include="src\DreamTools\Events\MouseEvent.h">
       <Filter>DreamTools\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Layer.h">
+      <Filter>DreamTools</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\LayerStack.h">
+      <Filter>DreamTools</Filter>
+    </ClInclude>
     <ClInclude Include="src\DreamTools\Log.h">
       <Filter>DreamTools</Filter>
     </ClInclude>
@@ -62,6 +68,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Application.cpp">
+      <Filter>DreamTools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DreamTools\Layer.cpp">
+      <Filter>DreamTools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DreamTools\LayerStack.cpp">
       <Filter>DreamTools</Filter>
     </ClCompile>
     <ClCompile Include="src\DreamTools\Log.cpp">

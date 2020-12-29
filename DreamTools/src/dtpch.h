@@ -16,6 +16,7 @@
 
 #include "DreamTools/Log.h"
 #include <bitset>
+#include <vector>
 
 #ifdef DT_PLATFORM_WINDOWS
 	#include <Windows.h>
