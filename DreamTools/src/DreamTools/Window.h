@@ -12,7 +12,7 @@ namespace DreamTools
 		unsigned int Width;
 		unsigned int Height;
 
-		WindowProps(const std::string& title = "DreamTools", const unsigned width = 1024, const unsigned height = 512) : Title(title), Width(width), Height(height)
+		WindowProps(const std::string& title = "DreamTools", const unsigned width = 1280, const unsigned height = 720) : Title(title), Width(width), Height(height)
 		{
 			
 		}

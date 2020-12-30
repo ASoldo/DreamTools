@@ -7,3 +7,6 @@
 [submodule "DreamTools/vendor/GLFW"]
 	path = DreamTools/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
+[submodule "DreamTools/vendor/imgui"]
+	path = DreamTools/vendor/imgui
+	url = https://github.com/TheCherno/imgui

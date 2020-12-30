@@ -1,4 +1,5 @@
 #include <DreamTools.h>
+#include "DreamTools/ImGui/ImGuiLayer.h"
 
 class ExampleLayer : public DreamTools::Layer
 {
@@ -24,6 +25,7 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
+		PushOverlay(new DreamTools::ImGuiLayer());
 	}
 	~Sandbox()
 	{
