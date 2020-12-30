@@ -17,3 +17,5 @@
 	#define DT_CLIENT_ASSERT(x, ...)
 	#define DT_CORE_ASSERT(x, ...)
 #endif
+
+#define DT_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)

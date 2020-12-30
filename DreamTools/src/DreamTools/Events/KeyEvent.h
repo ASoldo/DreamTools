@@ -5,10 +5,10 @@
 
 namespace DreamTools
 {
-	class KeyEvent : public Event
+	class DREAMTOOLS_API KeyEvent : public Event
 	{
 	public:
-		KeyCode GetkeyCode() const { return m_KeyCode; }
+		KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
@@ -17,7 +17,7 @@ namespace DreamTools
 		KeyCode m_KeyCode;
 	};
 
-	class KeyPressedEvent : public KeyEvent
+	class DREAMTOOLS_API KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(const KeyCode keycode, const uint16_t repeatCount) : KeyEvent(keycode), m_RepeatCount(repeatCount){}
@@ -35,7 +35,7 @@ namespace DreamTools
 		uint16_t m_RepeatCount;
 	};
 
-	class KeyReleasedEvent : public KeyEvent
+	class DREAMTOOLS_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(const KeyCode keycode) : KeyEvent(keycode){}
@@ -50,10 +50,10 @@ namespace DreamTools
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class KeyTypedEvent : public KeyEvent
+	class DREAMTOOLS_API KeyTypedEvent : public KeyEvent
 	{
 	public:
-		KeyTypedEvent(const KeyCode keycode) : KeyEvent(keycode){}
+		KeyTypedEvent(int keycode) : KeyEvent(keycode){}
 
 		std::string ToString() const override
 		{

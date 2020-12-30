@@ -4,7 +4,7 @@
 
 namespace DreamTools
 {
-	enum class EventType
+	enum class DREAMTOOLS_API EventType
 	{
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
@@ -51,7 +51,7 @@ namespace DreamTools
 		bool m_Handled = false;
 	};
 
-	class EventDispatcher
+	class DREAMTOOLS_API EventDispatcher
 	{
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;

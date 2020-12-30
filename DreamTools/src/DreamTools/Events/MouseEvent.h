@@ -5,7 +5,7 @@
 
 namespace DreamTools
 {
-	class MouseMovedEvent : public Event
+	class DREAMTOOLS_API MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(const float x, const float y) : m_MouseX(x), m_MouseY(y){}
@@ -27,7 +27,7 @@ namespace DreamTools
 		float m_MouseX, m_MouseY;
 	};
 
-	class MouseScrolledEvent : public Event
+	class DREAMTOOLS_API MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(const float xOffset, const float yOffset) : m_OffsetX(xOffset), m_OffsetY(yOffset){}
@@ -49,7 +49,7 @@ namespace DreamTools
 		float m_OffsetX, m_OffsetY;
 	};
 
-	class MouseButtonEvent : public Event
+	class DREAMTOOLS_API MouseButtonEvent : public Event
 	{
 	public:
 		MouseCode GetMouseButton() const { return m_Button; }
@@ -60,7 +60,7 @@ namespace DreamTools
 		MouseCode m_Button;
 	};
 
-	class MouseButtonPressedEvent : public MouseButtonEvent
+	class DREAMTOOLS_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(const MouseCode button) : MouseButtonEvent(button){}
