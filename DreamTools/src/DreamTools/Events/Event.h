@@ -4,7 +4,7 @@
 
 namespace DreamTools
 {
-	enum class DREAMTOOLS_API EventType
+	enum class EventType
 	{
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,

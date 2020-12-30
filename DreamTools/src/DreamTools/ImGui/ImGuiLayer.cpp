@@ -10,6 +10,7 @@
 //Temp
 #include "../vendor/GLFW/include/GLFW/glfw3.h"
 #include "glad/glad.h"
+#include "../Events/ApplicationEvent.h"
 
 
 namespace DreamTools
@@ -155,7 +156,7 @@ namespace DreamTools
 	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		io.KeysDown[e.GetKeyCode()] = true;
+		io.KeysDown[e.GetKeyCode()] = false;
 		return false;
 	}
 
