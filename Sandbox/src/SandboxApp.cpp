@@ -1,6 +1,8 @@
 #include <DreamTools.h>
 #include "DreamTools/ImGui/ImGuiLayer.h"
 
+#include "imgui/imgui.h"
+
 //OpenGL Matehmatics Demo
 //#include <glm/vec3.hpp> // glm::vec3
 //#include <glm/vec4.hpp> // glm::vec4
@@ -32,6 +34,14 @@ public:
 		{
 			DT_CORE_TRACE("Tab is pressed! (POLL)");
 		}
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Welcome");
+		ImGui::Text("Hello");
+		ImGui::ColorEdit4("", new float[4]);
+		ImGui::End();
 	}
 
 	void OnEvent(DreamTools::Event& event) override

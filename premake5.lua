@@ -2,6 +2,7 @@ workspace "DreamTools"
 
 	startproject "Sandbox"
 	architecture "x64"
+	
 
 	configurations
 	{
@@ -26,8 +27,11 @@ workspace "DreamTools"
 
 project "DreamTools"
 	location "DreamTools"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "on"
+	
 
 	
 
@@ -43,6 +47,11 @@ project "DreamTools"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
  
 	includedirs
@@ -64,8 +73,8 @@ project "DreamTools"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "off"
+		
+		
 		systemversion "latest"
 
 	defines
@@ -75,34 +84,30 @@ project "DreamTools"
 		"GLFW_INCLUDE_NONE"
 	}
 
-	postbuildcommands
-	{
-		--("IF NOT EXIST ../bin/" .. outputdir .. "/Sandbox mkdir ../bin/" .. outputdir .. "/Sandbox"),
-		("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-	}
-
 	filter "configurations:Debug"
 		defines "DT_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 	
 
 	filter "configurations:Release"
 		defines "DT_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 	
 
 	filter "configurations:Dist"
 		defines "DT_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 	
 
 	project "Sandbox"
 		location "Sandbox"
 		kind "ConsoleApp"
 		language "C++"
+		cppdialect "C++17"
+		staticruntime "on"
 
 
 
@@ -120,6 +125,7 @@ project "DreamTools"
 	{
 		"DreamTools/vendor/spdlog/include",
 		"DreamTools/src",
+		"DreamTools/vendor",
 		"%{IncludeDir.glm}"
 	}
 
@@ -129,8 +135,8 @@ project "DreamTools"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
-		staticruntime "off"
+		
+		staticruntime "on"
 		systemversion "latest"
 
 	defines
@@ -141,17 +147,16 @@ project "DreamTools"
 	filter "configurations:Debug"
 		defines "DT_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 	
 
 	filter "configurations:Release"
 		defines "DT_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 	
 
 	filter "configurations:Dist"
 		defines "DT_DIST"
 		runtime "Release"
-		optimize "On"
-	
+		optimize "on"

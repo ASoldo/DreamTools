@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef DT_PLATFORM_WINDOWS
+#if DT_DYNAMIC_LINK
 	#ifdef DT_BUILD_DLL
 		#define DREAMTOOLS_API __declspec(dllexport)
 	#else
 		#define DREAMTOOLS_API __declspec(dllimport)
 	#endif
+#else
+	#define DREAMTOOLS_API
+#endif
 #else
 	#error DreamTools only supports Windows OS!
 #endif
