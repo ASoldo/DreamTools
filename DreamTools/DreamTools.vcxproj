@@ -167,7 +167,6 @@
     <ClInclude Include="src\DreamTools\Log.h" />
     <ClInclude Include="src\DreamTools\Window.h" />
     <ClInclude Include="src\Input.h" />
-    <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\dtpch.h" />
@@ -587,11 +586,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Application.cpp" />
+    <ClCompile Include="src\DreamTools\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\DreamTools\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\DreamTools\Layer.cpp" />
     <ClCompile Include="src\DreamTools\LayerStack.cpp" />
     <ClCompile Include="src\DreamTools\Log.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\dtpch.cpp">
