@@ -58,6 +58,9 @@
     <ClInclude Include="src\DreamTools\ImGui\ImGuiLayer.h">
       <Filter>DreamTools\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Input.h">
+      <Filter>DreamTools</Filter>
+    </ClInclude>
     <ClInclude Include="src\DreamTools\Layer.h">
       <Filter>DreamTools</Filter>
     </ClInclude>
@@ -70,8 +73,12 @@
     <ClInclude Include="src\DreamTools\Window.h">
       <Filter>DreamTools</Filter>
     </ClInclude>
+    <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
       <Filter>Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
@@ -96,6 +103,9 @@
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
       <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
