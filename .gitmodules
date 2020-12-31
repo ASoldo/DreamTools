@@ -10,3 +10,6 @@
 [submodule "DreamTools/vendor/imgui"]
 	path = DreamTools/vendor/imgui
 	url = https://github.com/TheCherno/imgui
+[submodule "DreamTools/vendor/glm"]
+	path = DreamTools/vendor/glm
+	url = https://github.com/g-truc/glm
