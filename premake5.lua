@@ -1,4 +1,6 @@
 workspace "DreamTools"
+
+	startproject "Sandbox"
 	architecture "x64"
 
 	configurations
@@ -15,14 +17,18 @@ workspace "DreamTools"
 	IncludeDir["GLAD"] = "DreamTools/vendor/GLAD/Include"
 	IncludeDir["ImGui"] = "DreamTools/vendor/imgui"
 
-	include "DreamTools/vendor/GLFW"
-	include "DreamTools/vendor/GLAD"
-	include "DreamTools/vendor/imgui"
+	group "Dependencies"
+		include "DreamTools/vendor/GLFW"
+		include "DreamTools/vendor/GLAD"
+		include "DreamTools/vendor/imgui"
+	group ""
 
 project "DreamTools"
 	location "DreamTools"
 	kind "SharedLib"
 	language "C++"
+
+	
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -55,7 +61,7 @@ project "DreamTools"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "off"
 		systemversion "latest"
 
 	defines
@@ -72,19 +78,19 @@ project "DreamTools"
 
 	filter "configurations:Debug"
 		defines "DT_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 	
 
 	filter "configurations:Release"
 		defines "DT_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 	
 
 	filter "configurations:Dist"
 		defines "DT_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 	
 
@@ -92,6 +98,9 @@ project "DreamTools"
 		location "Sandbox"
 		kind "ConsoleApp"
 		language "C++"
+
+
+
 
 		targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 		objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -115,7 +124,7 @@ project "DreamTools"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
+		staticruntime "off"
 		systemversion "latest"
 
 	defines
@@ -125,18 +134,18 @@ project "DreamTools"
 
 	filter "configurations:Debug"
 		defines "DT_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 	
 
 	filter "configurations:Release"
 		defines "DT_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 	
 
 	filter "configurations:Dist"
 		defines "DT_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 	
