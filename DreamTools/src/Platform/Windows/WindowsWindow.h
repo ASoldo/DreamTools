@@ -1,7 +1,11 @@
 #pragma once
 
 #include "DreamTools/Window.h"
+
+#include "DreamTools/Renderer/GraphicsContext.h"
 #include "../vendor/GLFW/include/GLFW/glfw3.h"
+
+
 
 struct GLFWWindow;
 
@@ -26,8 +30,10 @@ namespace DreamTools
 	private:
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
+
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

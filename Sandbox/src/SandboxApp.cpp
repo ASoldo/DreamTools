@@ -38,8 +38,8 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		ImGui::Begin("Welcome");
-		ImGui::Text("Hello");
+		ImGui::Begin("Welcome, Aetrix!");
+		ImGui::Text("Pick your favourite color");
 		ImGui::ColorEdit4("", new float[4]);
 		ImGui::End();
 	}
