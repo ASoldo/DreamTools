@@ -156,10 +156,13 @@
     <ClInclude Include="src\DreamTools\Layer.h" />
     <ClInclude Include="src\DreamTools\LayerStack.h" />
     <ClInclude Include="src\DreamTools\Log.h" />
+    <ClInclude Include="src\DreamTools\Renderer\Buffer.h" />
     <ClInclude Include="src\DreamTools\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\DreamTools\Renderer\Renderer.h" />
     <ClInclude Include="src\DreamTools\Renderer\Shader.h" />
     <ClInclude Include="src\DreamTools\Window.h" />
     <ClInclude Include="src\Input.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
@@ -585,7 +588,10 @@
     <ClCompile Include="src\DreamTools\Layer.cpp" />
     <ClCompile Include="src\DreamTools\LayerStack.cpp" />
     <ClCompile Include="src\DreamTools\Log.cpp" />
+    <ClCompile Include="src\DreamTools\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\DreamTools\Renderer\Renderer.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
@@ -607,4 +613,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project>
+</Project> 
