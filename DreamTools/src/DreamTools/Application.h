@@ -7,6 +7,8 @@
 //#include "Events/Event.h"
 #include "DreamTools/ImGui/ImGuiLayer.h"
 
+#include "DreamTools/Renderer/Shader.h"
+
 namespace DreamTools 
 { 
 	class DREAMTOOLS_API Application
@@ -35,6 +37,8 @@ namespace DreamTools
 		unsigned int m_VertexArray;
 		unsigned int m_VertexBuffer;
 		unsigned int m_IndexBuffer;
+
+		std::unique_ptr<Shader> m_Shader;
 	private:
 		static Application* s_Instance;
 	};

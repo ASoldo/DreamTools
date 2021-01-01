@@ -3,6 +3,9 @@
 
 #include "imgui/imgui.h"
 
+#include "../vendor/GLFW/include/GLFW/glfw3.h"
+
+
 //OpenGL Matehmatics Demo
 //#include <glm/vec3.hpp> // glm::vec3
 //#include <glm/vec4.hpp> // glm::vec4
@@ -41,6 +44,12 @@ public:
 		ImGui::Begin("Welcome, Aetrix!");
 		ImGui::Text("Pick your favourite color");
 		ImGui::ColorEdit4("", new float[4]);
+		ImGui::End();
+
+		ImGui::Begin("OpenGL Info:");
+		ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
+		ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
+		ImGui::Text("Version: %s", glGetString(GL_VERSION));
 		ImGui::End();
 	}
 

@@ -157,6 +157,7 @@
     <ClInclude Include="src\DreamTools\LayerStack.h" />
     <ClInclude Include="src\DreamTools\Log.h" />
     <ClInclude Include="src\DreamTools\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\DreamTools\Renderer\Shader.h" />
     <ClInclude Include="src\DreamTools\Window.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
@@ -584,6 +585,7 @@
     <ClCompile Include="src\DreamTools\Layer.cpp" />
     <ClCompile Include="src\DreamTools\LayerStack.cpp" />
     <ClCompile Include="src\DreamTools\Log.cpp" />
+    <ClCompile Include="src\DreamTools\Renderer\Shader.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
