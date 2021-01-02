@@ -17,64 +17,6 @@ namespace DreamTools
 	
 	Application* Application::s_Instance = nullptr;
 
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-	{
-		switch (type)
-		{
-			case DreamTools::ShaderDataType::None:
-				return 0;
-				break;
-
-			case DreamTools::ShaderDataType::Float:
-				return GL_FLOAT;
-				break;
-
-			case DreamTools::ShaderDataType::Float2:
-				return GL_FLOAT;
-				break;
-
-			case DreamTools::ShaderDataType::Float3:
-				return GL_FLOAT;
-				break;
-
-			case DreamTools::ShaderDataType::Float4:
-				return GL_FLOAT;
-				break;
-
-			case DreamTools::ShaderDataType::Mat3:
-				return GL_FLOAT;
-				break;
-
-			case DreamTools::ShaderDataType::Mat4:
-				return GL_FLOAT;
-				break;
-
-			case DreamTools::ShaderDataType::Int:
-				return GL_INT;
-				break;
-
-			case DreamTools::ShaderDataType::Int2:
-				return GL_INT;
-				break;
-
-			case DreamTools::ShaderDataType::Int3:
-				return GL_INT;
-				break;
-
-			case DreamTools::ShaderDataType::Int4:
-				return GL_INT;
-				break;
-
-			case DreamTools::ShaderDataType::Bool:
-				return GL_BOOL;
-				break;
-			default:
-				break;
-		}
-		DT_CORE_ASSERT(false, "Unknown ShaderDataTypeToOpenGLBaseType!");
-		return 0;
-	}
-
 	Application::Application()
 	{
 		DT_CORE_ASSERT(!s_Instance, "Application is already running!");
@@ -85,45 +27,57 @@ namespace DreamTools
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
-		//Vertex Array
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
-
+		m_VertexArray.reset(VertexArray::Create());
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
 			0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
 			0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 		};
-		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		
+		BufferLayout layout =
 		{
-			BufferLayout layout =
-			{
-				{ ShaderDataType::Float3, "a_Position" },
-				{ ShaderDataType::Float4, "a_Color" },
-			};
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float4, "a_Color" },
+		};
 
 
-			m_VertexBuffer->SetLayout(layout);
-		}
-
-		uint32_t index = 0;
-		const auto& layout = m_VertexBuffer->GetLayout();
-		for (const auto& element : layout)
-		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index,
-				element.GetComponentCount(),
-				ShaderDataTypeToOpenGLBaseType(element.Type),
-				element.Normalized ? GL_TRUE : GL_FALSE,
-				layout.GetStride(),
-				(const void*)element.Offset);
-			index++;
-		}
-
+		vertexBuffer->SetLayout(layout);
+		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		std::shared_ptr<IndexBuffer> indexBuffer;
+		indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		m_VertexArray->SetIndexBuffer(indexBuffer);
+
+		m_SquareVertexArray.reset(VertexArray::Create());
+		
+
+		float squareVertices[3 * 4] = {
+			-0.75f, -0.75f, 0.0f,
+			 0.75f, -0.75f, 0.0f, 
+			 0.75f,  0.75f, 0.0f, 
+			-0.75f,  0.75f, 0.0f, 
+		};
+
+		std::shared_ptr<VertexBuffer> squareVertexBuffer;
+		squareVertexBuffer.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		
+		/*BufferLayout squareVertexBufferLayout =
+		{
+			{ ShaderDataType::Float3, "a_Position" },
+			{ ShaderDataType::Float4, "a_Color" },
+		};*/
+
+		squareVertexBuffer->SetLayout({ { ShaderDataType::Float3, "a_Position" } });
+		m_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
+
+		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
+		std::shared_ptr<IndexBuffer> squareIndexBuffer;
+		squareIndexBuffer.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		m_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
 
 		//Shader Source code (Vertex)
 		std::string vertexSrc = R"(
@@ -164,6 +118,44 @@ namespace DreamTools
 
 
 		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
+
+		//Shader2 start
+		//Shader Source code (Vertex)
+		std::string blueShaderVertexSrc = R"(
+			#version 330 core
+
+			//vec3 is 12 bits
+			layout(location = 0) in vec3 a_Position;
+	
+			out vec3 v_Position;
+
+			void main()
+			{
+				v_Position = a_Position;
+				
+				gl_Position = vec4(a_Position, 1.0);
+				
+			}
+		)";
+
+		//Shader Source code (Fragment)
+		std::string blueShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec3 v_Position;
+
+			void main()
+			{
+				//color = vec4(1.0, 0.5, 0.65, 1.0);
+				color = vec4(0.1, 0.2, 0.3, 1.0);
+			}
+		)";
+
+
+		m_BlueShader.reset(new Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
+		//Shader2 End
 
 		//Index Buffer
 		//Shader
@@ -226,10 +218,14 @@ namespace DreamTools
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			m_Shader->Bind();
+			m_BlueShader->Bind();
+			m_SquareVertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
-			glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+
+			m_Shader->Bind();
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_LayerStack)
 			{

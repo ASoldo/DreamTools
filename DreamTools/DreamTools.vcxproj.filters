@@ -1372,6 +1372,8 @@
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="src\DreamTools\Renderer\VertexArray.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Application.cpp">
@@ -1416,6 +1418,8 @@
     <ClCompile Include="src\dtpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\DreamTools\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DreamTools.rc" />
