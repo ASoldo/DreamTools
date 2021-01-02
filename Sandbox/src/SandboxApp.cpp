@@ -51,6 +51,11 @@ public:
 		ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
 		ImGui::Text("Version: %s", glGetString(GL_VERSION));
 		ImGui::End();
+
+		static bool toogle = false;
+		ImGui::Begin("Settings");
+		ImGui::Checkbox("Soldo", &toogle);
+		ImGui::End();
 	}
 
 	void OnEvent(DreamTools::Event& event) override

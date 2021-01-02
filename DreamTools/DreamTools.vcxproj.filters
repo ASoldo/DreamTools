@@ -1371,6 +1371,7 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Application.cpp">
@@ -1415,5 +1416,11 @@
     <ClCompile Include="src\dtpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DreamTools.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\soldo\OneDrive\Desktop\Icon.ico" />
   </ItemGroup>
 </Project>
