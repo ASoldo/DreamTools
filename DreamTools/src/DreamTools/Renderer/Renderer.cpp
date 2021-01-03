@@ -5,7 +5,6 @@
 
 namespace DreamTools
 {
-
 	Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
 	void Renderer::BeginScene(OrthographicCamera& camera)
 	{

@@ -12,6 +12,17 @@
 
 #include "DreamTools/ImGui/ImGuiLayer.h"
 
+//Renderer ---------------------------
+#include "DreamTools/Renderer/Renderer.h"
+#include "DreamTools/Renderer/RenderCommand.h"
+
+#include "DreamTools/Renderer/Buffer.h"
+#include "DreamTools/Renderer/Shader.h"
+#include "DreamTools/Renderer/VertexArray.h"
+
+#include "DreamTools/Renderer/OrthographicCamera.h"
+//---------------------------------------
+
 //Entry Point ---------------------------
 #include "DreamTools/EntryPoint.h"
 //---------------------------------------
