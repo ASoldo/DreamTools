@@ -5,6 +5,14 @@
 
 #include "../vendor/GLFW/include/GLFW/glfw3.h"
 
+//#include "DreamTools/Renderer/Renderer.h"
+//#include "DreamTools/Renderer/RendererAPI.h"
+//#include "DreamTools/Renderer/RenderCommand.h"
+//#include "Platform/OpenGL/OpenGLRendererAPI.h"
+//#include "Platform/OpenGL/OpenGLVertexArray.h"
+
+
+
 
 //OpenGL Matehmatics Demo
 //#include <glm/vec3.hpp> // glm::vec3
@@ -41,6 +49,8 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
+
+
 		ImGui::Begin("Welcome, Aetrix!");
 		ImGui::Text("Pick your favourite color");
 		ImGui::ColorEdit4("", new float[4]);
@@ -52,9 +62,22 @@ public:
 		ImGui::Text("Version: %s", glGetString(GL_VERSION));
 		ImGui::End();
 
-		static bool toogle = false;
+		//static bool toogle = false;
 		ImGui::Begin("Settings");
-		ImGui::Checkbox("Soldo", &toogle);
+		//ImGui::Checkbox("Soldo", &toogle);
+
+		/*DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+		DreamTools::RenderCommand::Clear();
+
+		DreamTools::Renderer::BeginScene();
+
+		m_BlueShader->Bind();
+		DreamTools::Renderer::Submit(DreamTools::m_SquareVertexArray);
+
+		m_Shader->Bind();
+		DreamTools::Renderer::Submit(DreamTools::m_VertexArray);
+
+		DreamTools::Renderer::EndScene();*/
 		ImGui::End();
 	}
 

@@ -10,6 +10,7 @@
 #include "DreamTools/Renderer/Shader.h"
 #include "DreamTools/Renderer/Buffer.h"
 #include "DreamTools//Renderer/VertexArray.h"
+#include "DreamTools/Renderer/OrthographicCamera.h"
 
 namespace DreamTools 
 { 
@@ -43,6 +44,7 @@ namespace DreamTools
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVertexArray;
 		
+		OrthographicCamera m_Camera;
 	private:
 		static Application* s_Instance;
 	};

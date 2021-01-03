@@ -159,6 +159,7 @@
     <ClInclude Include="src\DreamTools\Log.h" />
     <ClInclude Include="src\DreamTools\Renderer\Buffer.h" />
     <ClInclude Include="src\DreamTools\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\DreamTools\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\DreamTools\Renderer\RenderCommand.h" />
     <ClInclude Include="src\DreamTools\Renderer\Renderer.h" />
     <ClInclude Include="src\DreamTools\Renderer\RendererAPI.h" />
@@ -595,6 +596,7 @@
     <ClCompile Include="src\DreamTools\LayerStack.cpp" />
     <ClCompile Include="src\DreamTools\Log.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\DreamTools\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Renderer.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\RendererAPI.cpp" />
