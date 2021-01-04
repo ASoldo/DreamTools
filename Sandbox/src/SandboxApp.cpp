@@ -40,7 +40,7 @@ public:
 			0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
 			0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 		};
-		std::shared_ptr<DreamTools::VertexBuffer> vertexBuffer;
+		DreamTools::Ref<DreamTools::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(DreamTools::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		DreamTools::BufferLayout layout =
@@ -54,7 +54,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<DreamTools::IndexBuffer> indexBuffer;
+		DreamTools::Ref<DreamTools::IndexBuffer> indexBuffer;
 		indexBuffer.reset(DreamTools::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -81,7 +81,7 @@ public:
 		m_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<DreamTools::IndexBuffer> squareIndexBuffer;
+		DreamTools::Ref<DreamTools::IndexBuffer> squareIndexBuffer;
 		squareIndexBuffer.reset(DreamTools::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
 
@@ -343,11 +343,11 @@ public:
 	}*/
 
 	private:
-		std::shared_ptr<DreamTools::Shader> m_Shader;
-		std::shared_ptr<DreamTools::VertexArray> m_VertexArray;
-
-		std::shared_ptr<DreamTools::Shader> m_FlatColorShader;
-		std::shared_ptr<DreamTools::VertexArray> m_SquareVertexArray;
+		DreamTools::Ref<DreamTools::Shader> m_Shader;
+		DreamTools::Ref<DreamTools::VertexArray> m_VertexArray;
+					
+		DreamTools::Ref<DreamTools::Shader> m_FlatColorShader;
+		DreamTools::Ref<DreamTools::VertexArray> m_SquareVertexArray;
 
 		DreamTools::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;

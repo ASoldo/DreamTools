@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 #ifdef DT_PLATFORM_WINDOWS
 #if DT_DYNAMIC_LINK
@@ -23,3 +24,12 @@
 #endif
 
 #define DT_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace DreamTools
+{
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+}
