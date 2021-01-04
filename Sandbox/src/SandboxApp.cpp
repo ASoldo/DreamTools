@@ -4,6 +4,7 @@
 #include "imgui/imgui.h"
 
 #include "../vendor/GLFW/include/GLFW/glfw3.h"
+#include "../glm/glm/gtc/matrix_transform.hpp"
 
 //OpenGL Matehmatics Demo
 //#include <glm/vec3.hpp> // glm::vec3
@@ -23,7 +24,7 @@
 class ExampleLayer : public DreamTools::Layer
 {
 public:
-	ExampleLayer() : Layer("Example") , m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), m_CameraRotation(0.0f)
+	ExampleLayer() : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), m_CameraRotation(0.0f) //, m_SquarePosition({0.0f, 0.0f, 0.0f})
 	{
 		//OpenGL Matehmatics Demo
 		//auto cam = camera(5.0f, { 0.5f, 0.5f });
@@ -57,10 +58,10 @@ public:
 
 
 		float squareVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f,
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f,
 		};
 
 		std::shared_ptr<DreamTools::VertexBuffer> squareVertexBuffer;
@@ -89,6 +90,7 @@ public:
 			layout(location = 1) in vec4 a_Color;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 	
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -97,7 +99,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 				
 			}
 		)";
@@ -132,6 +134,7 @@ public:
 			layout(location = 0) in vec3 a_Position;
 	
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 
@@ -139,7 +142,7 @@ public:
 			{
 				v_Position = a_Position;
 				
-				gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 				
 			}
 		)";
@@ -176,8 +179,9 @@ public:
 		}*/
 
 		//Print Delta Time
-		DT_CORE_TRACE("Delta Time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMillieconds());
+		//DT_CORE_TRACE("Delta Time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMillieconds());
 
+		//Camera Movement Start
 		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::A))
 		{
 			m_CameraPosition.x += m_CameraSpeed * ts;
@@ -186,7 +190,6 @@ public:
 		{
 			m_CameraPosition.x -= m_CameraSpeed * ts;
 		}
-
 		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::W))
 		{
 			m_CameraPosition.y -= m_CameraSpeed * ts;
@@ -195,6 +198,31 @@ public:
 		{
 			m_CameraPosition.y += m_CameraSpeed * ts;
 		}
+		//Camera Movement End
+
+		//Move Square
+
+		////Square Movement Start
+		//if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Right))
+		//{
+		//	m_SquarePosition.x += m_SquareMoveSpeed * ts;
+		//}
+		//else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Left))
+		//{
+		//	m_SquarePosition.x -= m_SquareMoveSpeed * ts;
+		//}
+		//if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Down))
+		//{
+		//	m_SquarePosition.y -= m_SquareMoveSpeed * ts;
+		//}
+		//else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Up))
+		//{
+		//	m_SquarePosition.y += m_SquareMoveSpeed * ts;
+		//}
+		////Square Movement End
+
+
+
 		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Q))
 		{
 			m_CameraRotation -= m_RotationSpeed * ts;
@@ -214,9 +242,21 @@ public:
 
 		DreamTools::Renderer::BeginScene(m_Camera);
 
-		DreamTools::Renderer::Submit(m_BlueShader, m_SquareVertexArray);
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-		DreamTools::Renderer::Submit(m_Shader, m_VertexArray);
+		for (int y = 0; y < 20; y++)
+		{
+			for (int x = 0; x < 20; x++)
+			{
+				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+				DreamTools::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);
+			}
+		}
+		/*glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
+		DreamTools::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);*/
+
+		//DreamTools::Renderer::Submit(m_Shader, m_VertexArray);
 
 		DreamTools::Renderer::EndScene();
 	}
@@ -255,6 +295,7 @@ public:
 		/*DreamTools::EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<DreamTools::KeyPressedEvent>(DT_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));*/
 	}
+	//On Event Sample
 
 	/*bool OnKeyPressedEvent(DreamTools::KeyPressedEvent& event)
 	{
@@ -298,6 +339,10 @@ public:
 		float m_CameraSpeed = 0.1f;
 		float m_CameraRotation = 0.0f;
 		float m_RotationSpeed = 10.0f;
+
+		//Move Square
+		//float m_SquareMoveSpeed = 0.1f;
+		//glm::vec3 m_SquarePosition;
 };
 
 class Sandbox : public DreamTools::Application
