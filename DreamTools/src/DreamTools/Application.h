@@ -7,14 +7,9 @@
 //#include "Events/Event.h"
 #include "DreamTools/ImGui/ImGuiLayer.h"
 
-#include "DreamTools/Renderer/Shader.h"
-#include "DreamTools/Renderer/Buffer.h"
-#include "DreamTools//Renderer/VertexArray.h"
-#include "DreamTools/Renderer/OrthographicCamera.h"
-
 namespace DreamTools 
 { 
-	class DREAMTOOLS_API Application
+	class Application
 	{
 	public:
 		Application();
