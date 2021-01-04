@@ -7,6 +7,7 @@
 #include "DreamTools/Renderer/Renderer.h"
 #include "DreamTools/Renderer/RenderCommand.h"
 
+#include "../GLFW/include/GLFW/glfw3.h"
 #include "Input.h"
 
 namespace DreamTools
@@ -21,6 +22,7 @@ namespace DreamTools
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		m_Window->SetVSync(true);
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -77,12 +79,15 @@ namespace DreamTools
 			DT_CLIENT_TRACE(e);
 		}*/
 		
+		float time = (float)glfwGetTime(); //Platform::GetTime()
+		Timestep timestep = time - m_LastFrameTime;
+		m_LastFrameTime = time;
 		///Main game Loop
 		while (m_Running)
 		{
 			for (Layer* layer : m_LayerStack)
 			{
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 			}
 
 			m_ImGuiLayer->Begin();

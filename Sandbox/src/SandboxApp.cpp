@@ -166,7 +166,7 @@ public:
 		//Index Buffer
 		//Shader
 	}
-	void OnUpdate() override
+	void OnUpdate(DreamTools::Timestep ts) override
 	{
 		//DT_CORE_INFO("ExampleLayer::OnUpdate");
 
@@ -175,30 +175,33 @@ public:
 			DT_CORE_TRACE("Tab is pressed! (POLL)");
 		}*/
 
+		//Print Delta Time
+		DT_CORE_TRACE("Delta Time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMillieconds());
+
 		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::A))
 		{
-			m_CameraPosition.x += m_CameraSpeed;
+			m_CameraPosition.x += m_CameraSpeed * ts;
 		}
 		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::D))
 		{
-			m_CameraPosition.x -= m_CameraSpeed;
+			m_CameraPosition.x -= m_CameraSpeed * ts;
 		}
 
 		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::W))
 		{
-			m_CameraPosition.y -= m_CameraSpeed;
+			m_CameraPosition.y -= m_CameraSpeed * ts;
 		}
 		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::S))
 		{
-			m_CameraPosition.y += m_CameraSpeed;
+			m_CameraPosition.y += m_CameraSpeed * ts;
 		}
 		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Q))
 		{
-			m_CameraRotation -= m_RotationSpeed;
+			m_CameraRotation -= m_RotationSpeed * ts;
 		}
 		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::E))
 		{
-			m_CameraRotation += m_RotationSpeed;
+			m_CameraRotation += m_RotationSpeed * ts;
 		}
 
 		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
@@ -220,11 +223,18 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
+		
+
 		ImGui::Begin("OpenGL Info:");
 		ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
 		ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
 		ImGui::Text("Version: %s", glGetString(GL_VERSION));
 		ImGui::End();
+
+		/*ImGui::Begin("Timestep:");
+		ImGui::Text("Seconds: %f", glGetFloatv();
+		ImGui::Text("Milliseconds: %s", glGetString(GL_RENDERER));
+		ImGui::End();*/
 	}
 
 	void OnEvent(DreamTools::Event& event) override
@@ -287,7 +297,7 @@ public:
 		glm::vec3 m_CameraPosition;
 		float m_CameraSpeed = 0.1f;
 		float m_CameraRotation = 0.0f;
-		float m_RotationSpeed = 2.0f;
+		float m_RotationSpeed = 10.0f;
 };
 
 class Sandbox : public DreamTools::Application

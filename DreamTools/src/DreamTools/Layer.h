@@ -1,6 +1,7 @@
 #pragma once
 
 #include "DreamTools/Core.h"
+#include "DreamTools/Core/Timestep.h"
 #include "DreamTools/Events/Event.h"
 
 namespace DreamTools
@@ -13,7 +14,7 @@ namespace DreamTools
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

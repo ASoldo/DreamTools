@@ -2,9 +2,10 @@
 
 //For Use by DreamTools Applications
 #include "DreamTools/Application.h"
-
 #include "DreamTools/Layer.h"
 #include "DreamTools/Log.h"
+
+#include "DreamTools/Core/Timestep.h"
 
 #include "DreamTools/Input.h"
 #include "DreamTools/Core/KeyCodes.h"

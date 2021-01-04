@@ -147,6 +147,7 @@
     <ClInclude Include="src\DreamTools\Core\Base.h" />
     <ClInclude Include="src\DreamTools\Core\KeyCodes.h" />
     <ClInclude Include="src\DreamTools\Core\MouseCodes.h" />
+    <ClInclude Include="src\DreamTools\Core\Timestep.h" />
     <ClInclude Include="src\DreamTools\EntryPoint.h" />
     <ClInclude Include="src\DreamTools\Events\ApplicationEvent.h" />
     <ClInclude Include="src\DreamTools\Events\Event.h" />
