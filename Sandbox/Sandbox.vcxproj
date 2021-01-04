@@ -138,15 +138,6 @@
       <Project>{DFDB218D-CB93-63DA-349B-3C362072FECA}</Project>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Sandbox.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="C:\Users\soldo\OneDrive\Desktop\Icon.ico" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

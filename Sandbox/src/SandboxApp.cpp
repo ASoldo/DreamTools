@@ -1,10 +1,14 @@
 #include <DreamTools.h>
+
+#include "Platform/OpenGL/OpenGLShader.h"
 #include "DreamTools/ImGui/ImGuiLayer.h"
 
 #include "imgui/imgui.h"
 
 #include "../vendor/GLFW/include/GLFW/glfw3.h"
 #include "../glm/glm/gtc/matrix_transform.hpp"
+#include "../glm/glm/gtc/type_ptr.hpp"
+
 
 //OpenGL Matehmatics Demo
 //#include <glm/vec3.hpp> // glm::vec3
@@ -123,11 +127,11 @@ public:
 		)";
 
 
-		m_Shader.reset(new DreamTools::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(DreamTools::Shader::Create(vertexSrc, fragmentSrc));
 
 		//Shader2 start
 		//Shader Source code (Vertex)
-		std::string blueShaderVertexSrc = R"(
+		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 
 			//vec3 is 12 bits
@@ -148,22 +152,25 @@ public:
 		)";
 
 		//Shader Source code (Fragment)
-		std::string blueShaderFragmentSrc = R"(
+		std::string flatColorShaderFragmentSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
 
 			in vec3 v_Position;
 
+			uniform vec3 u_Color;
+
 			void main()
 			{
 				//color = vec4(1.0, 0.5, 0.65, 1.0);
-				color = vec4(0.1, 0.2, 0.3, 1.0);
+				//color = vec4(0.1, 0.2, 0.3, 1.0);
+				color = vec4(u_Color, 1.0);
 			}
 		)";
 
 
-		m_BlueShader.reset(new DreamTools::Shader(blueShaderVertexSrc, blueShaderFragmentSrc));
+		m_FlatColorShader.reset(DreamTools::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 		//Shader2 End
 
 		//Index Buffer
@@ -184,19 +191,19 @@ public:
 		//Camera Movement Start
 		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::A))
 		{
-			m_CameraPosition.x += m_CameraSpeed * ts;
+			m_CameraPosition.x -= m_CameraSpeed * ts;
 		}
 		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::D))
 		{
-			m_CameraPosition.x -= m_CameraSpeed * ts;
+			m_CameraPosition.x += m_CameraSpeed * ts;
 		}
 		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::W))
 		{
-			m_CameraPosition.y -= m_CameraSpeed * ts;
+			m_CameraPosition.y += m_CameraSpeed * ts;
 		}
 		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::S))
 		{
-			m_CameraPosition.y += m_CameraSpeed * ts;
+			m_CameraPosition.y -= m_CameraSpeed * ts;
 		}
 		//Camera Movement End
 
@@ -244,19 +251,23 @@ public:
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_FlatColorShader)->Bind();
+		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+
 		for (int y = 0; y < 20; y++)
 		{
 			for (int x = 0; x < 20; x++)
 			{
 				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				DreamTools::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);
+				
+				DreamTools::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, transform);
 			}
 		}
 		/*glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
 		DreamTools::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);*/
 
-		//DreamTools::Renderer::Submit(m_Shader, m_VertexArray);
+		DreamTools::Renderer::Submit(m_Shader, m_VertexArray);
 
 		DreamTools::Renderer::EndScene();
 	}
@@ -269,6 +280,10 @@ public:
 		ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
 		ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
 		ImGui::Text("Version: %s", glGetString(GL_VERSION));
+		ImGui::End();
+
+		ImGui::Begin("Color Picker:");
+		ImGui::ColorEdit3("Square Color:", glm::value_ptr(m_SquareColor));
 		ImGui::End();
 
 		/*ImGui::Begin("Timestep:");
@@ -331,7 +346,7 @@ public:
 		std::shared_ptr<DreamTools::Shader> m_Shader;
 		std::shared_ptr<DreamTools::VertexArray> m_VertexArray;
 
-		std::shared_ptr<DreamTools::Shader> m_BlueShader;
+		std::shared_ptr<DreamTools::Shader> m_FlatColorShader;
 		std::shared_ptr<DreamTools::VertexArray> m_SquareVertexArray;
 
 		DreamTools::OrthographicCamera m_Camera;
@@ -340,6 +355,7 @@ public:
 		float m_CameraRotation = 0.0f;
 		float m_RotationSpeed = 10.0f;
 
+		glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.4f };
 		//Move Square
 		//float m_SquareMoveSpeed = 0.1f;
 		//glm::vec3 m_SquarePosition;
