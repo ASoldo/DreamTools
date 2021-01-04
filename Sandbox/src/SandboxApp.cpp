@@ -23,7 +23,7 @@
 class ExampleLayer : public DreamTools::Layer
 {
 public:
-	ExampleLayer() : Layer("Example") , m_Camera(-1.6f, 1.6f, -0.9f, 0.9f)
+	ExampleLayer() : Layer("Example") , m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), m_CameraRotation(0.0f)
 	{
 		//OpenGL Matehmatics Demo
 		//auto cam = camera(5.0f, { 0.5f, 0.5f });
@@ -175,13 +175,39 @@ public:
 			DT_CORE_TRACE("Tab is pressed! (POLL)");
 		}*/
 
+		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::A))
+		{
+			m_CameraPosition.x += m_CameraSpeed;
+		}
+		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::D))
+		{
+			m_CameraPosition.x -= m_CameraSpeed;
+		}
+
+		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::W))
+		{
+			m_CameraPosition.y -= m_CameraSpeed;
+		}
+		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::S))
+		{
+			m_CameraPosition.y += m_CameraSpeed;
+		}
+		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Q))
+		{
+			m_CameraRotation -= m_RotationSpeed;
+		}
+		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::E))
+		{
+			m_CameraRotation += m_RotationSpeed;
+		}
+
 		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		DreamTools::RenderCommand::Clear();
 
 
 		//Set Camera Position
-		//m_Camera.SetPosition({ 0.5f, 0.5f, 0.0f });
-		m_Camera.SetRotation(45.0f);
+		m_Camera.SetPosition(m_CameraPosition);
+		m_Camera.SetRotation(m_CameraRotation);
 
 		DreamTools::Renderer::BeginScene(m_Camera);
 
@@ -215,7 +241,40 @@ public:
 			DT_CORE_TRACE("{0}", (char)e.GetKeyCode());
 		}*/
 		//DT_CORE_TRACE("{0}", event);
+
+		/*DreamTools::EventDispatcher dispatcher(event);
+		dispatcher.Dispatch<DreamTools::KeyPressedEvent>(DT_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));*/
 	}
+
+	/*bool OnKeyPressedEvent(DreamTools::KeyPressedEvent& event)
+	{
+		if (event.GetKeyCode() == DreamTools::Key::A)
+		{
+			m_CameraPosition.x += m_CameraSpeed;
+		}
+		else if (event.GetKeyCode() == DreamTools::Key::D)
+		{
+			m_CameraPosition.x -= m_CameraSpeed;
+		}
+		if (event.GetKeyCode() == DreamTools::Key::W)
+		{
+			m_CameraPosition.y -= m_CameraSpeed;
+		}
+		else if (event.GetKeyCode() == DreamTools::Key::S)
+		{
+			m_CameraPosition.y += m_CameraSpeed;
+		}
+
+		if (event.GetKeyCode() == DreamTools::Key::Q)
+		{
+			m_CameraRotation -= m_RotationSpeed;
+		}
+		else if (event.GetKeyCode() == DreamTools::Key::E)
+		{
+			m_CameraRotation += m_RotationSpeed;
+		}
+		return false;
+	}*/
 
 	private:
 		std::shared_ptr<DreamTools::Shader> m_Shader;
@@ -225,6 +284,10 @@ public:
 		std::shared_ptr<DreamTools::VertexArray> m_SquareVertexArray;
 
 		DreamTools::OrthographicCamera m_Camera;
+		glm::vec3 m_CameraPosition;
+		float m_CameraSpeed = 0.1f;
+		float m_CameraRotation = 0.0f;
+		float m_RotationSpeed = 2.0f;
 };
 
 class Sandbox : public DreamTools::Application
