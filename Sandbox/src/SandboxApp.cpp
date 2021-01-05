@@ -229,6 +229,7 @@ public:
 		//TextureShader End
 		//Assign to m_Texture
 		m_Texture = (DreamTools::Texture2D::Create("assets/textures/DreamToolsCheckerboard.png"));
+		m_LogoTexture = (DreamTools::Texture2D::Create("assets/textures/DreamToolsLogo.png"));
 
 		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -331,6 +332,9 @@ public:
 		DreamTools::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		//DreamTools::Renderer::Submit(m_Shader, m_VertexArray);
 
+		m_LogoTexture->Bind();
+		DreamTools::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		DreamTools::Renderer::EndScene();
 	}
 
@@ -414,6 +418,7 @@ public:
 		DreamTools::Ref<DreamTools::VertexArray> m_SquareVertexArray;
 
 		DreamTools::Ref<DreamTools::Texture2D> m_Texture;
+		DreamTools::Ref<DreamTools::Texture2D> m_LogoTexture;
 
 		DreamTools::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;

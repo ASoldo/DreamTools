@@ -28,6 +28,9 @@ namespace DreamTools
 		MoveWindow(console, 0, 0, 800, 500, TRUE);
 
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+
+		Renderer::Init();
+
 		m_Window->SetVSync(true);
 
 		m_ImGuiLayer = new ImGuiLayer();
