@@ -28,6 +28,12 @@
 class ExampleLayer : public DreamTools::Layer
 {
 public:
+	//Info
+	//					|-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	->	Example layer : 
+	//					|					|-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	->	m_Camera :
+	//					|					|											|-	-	-	-	-	-	-	->	m_CameraPosition :
+	//					|					|											|						|-	->	m_CameraRotation :
+	//					|					|											|						|		
 	ExampleLayer() : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), m_CameraRotation(0.0f) //, m_SquarePosition({0.0f, 0.0f, 0.0f})
 	{
 		//OpenGL Matehmatics Demo
@@ -35,10 +41,11 @@ public:
 
 		m_VertexArray.reset(DreamTools::VertexArray::Create());
 
-		float vertices[3 * 7] = {
+		float vertices[4 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
 			0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-			0.0f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+			0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+			-0.5f, 0.5, 0.0f, 1.0f, 1.0f, 0.5f, 1.0f
 		};
 		DreamTools::Ref<DreamTools::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(DreamTools::VertexBuffer::Create(vertices, sizeof(vertices)));
@@ -53,7 +60,7 @@ public:
 		vertexBuffer->SetLayout(layout);
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
-		uint32_t indices[3] = { 0, 1, 2 };
+		uint32_t indices[6] = { 0, 1, 2, 2, 3, 0 };
 		DreamTools::Ref<DreamTools::IndexBuffer> indexBuffer;
 		indexBuffer.reset(DreamTools::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
@@ -61,11 +68,11 @@ public:
 		m_SquareVertexArray.reset(DreamTools::VertexArray::Create());
 
 
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f,
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0F, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
 		std::shared_ptr<DreamTools::VertexBuffer> squareVertexBuffer;
@@ -77,7 +84,10 @@ public:
 			{ ShaderDataType::Float4, "a_Color" },
 		};*/
 
-		squareVertexBuffer->SetLayout({ { DreamTools::ShaderDataType::Float3, "a_Position" } });
+		squareVertexBuffer->SetLayout({ 
+			{ DreamTools::ShaderDataType::Float3, "a_Position" },
+			{ DreamTools::ShaderDataType::Float2, "a_TexCoord" },
+		});
 		m_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
@@ -173,9 +183,58 @@ public:
 		m_FlatColorShader.reset(DreamTools::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 		//Shader2 End
 
-		//Index Buffer
-		//Shader
+		//TextureShader start
+		//Shader Source code (Vertex)
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+
+			//vec3 is 12 bits
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+	
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+				
+			}
+		)";
+
+		//Shader Source code (Fragment)
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				//color = vec4(1.0, 0.5, 0.65, 1.0);
+				//color = vec4(0.1, 0.2, 0.3, 1.0);
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+
+		m_TextureShader.reset(DreamTools::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+		//TextureShader End
+		//Assign to m_Texture
+		m_Texture = (DreamTools::Texture2D::Create("assets/textures/DreamToolsCheckerboard.png"));
+
+		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
+
+
 	void OnUpdate(DreamTools::Timestep ts) override
 	{
 		//DT_CORE_INFO("ExampleLayer::OnUpdate");
@@ -264,10 +323,13 @@ public:
 				DreamTools::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, transform);
 			}
 		}
+
+		m_Texture->Bind();
 		/*glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
 		DreamTools::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);*/
 
-		DreamTools::Renderer::Submit(m_Shader, m_VertexArray);
+		DreamTools::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		//DreamTools::Renderer::Submit(m_Shader, m_VertexArray);
 
 		DreamTools::Renderer::EndScene();
 	}
@@ -282,8 +344,8 @@ public:
 		ImGui::Text("Version: %s", glGetString(GL_VERSION));
 		ImGui::End();
 
-		ImGui::Begin("Color Picker:");
-		ImGui::ColorEdit3("Square Color:", glm::value_ptr(m_SquareColor));
+		ImGui::Begin("Grid Color:");
+		ImGui::ColorEdit3("Color", glm::value_ptr(m_SquareColor));
 		ImGui::End();
 
 		/*ImGui::Begin("Timestep:");
@@ -346,8 +408,12 @@ public:
 		DreamTools::Ref<DreamTools::Shader> m_Shader;
 		DreamTools::Ref<DreamTools::VertexArray> m_VertexArray;
 					
+		DreamTools::Ref<DreamTools::Shader> m_TextureShader;
+
 		DreamTools::Ref<DreamTools::Shader> m_FlatColorShader;
 		DreamTools::Ref<DreamTools::VertexArray> m_SquareVertexArray;
+
+		DreamTools::Ref<DreamTools::Texture2D> m_Texture;
 
 		DreamTools::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;

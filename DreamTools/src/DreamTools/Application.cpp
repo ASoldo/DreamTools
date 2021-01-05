@@ -20,7 +20,13 @@ namespace DreamTools
 	{
 		DT_CORE_ASSERT(!s_Instance, "Application is already running!");
 		s_Instance = this;
-		m_Window = std::unique_ptr<Window>(Window::Create());
+		m_Window = Scope<Window>(Window::Create());
+		
+		//Resize Console App
+		HWND console = GetConsoleWindow();
+		//MoveWindow(window_handle, x, y, width, height, redraw_window);
+		MoveWindow(console, 0, 0, 800, 500, TRUE);
+
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 		m_Window->SetVSync(true);
 

@@ -19,6 +19,7 @@
 
 #include "DreamTools/Renderer/Buffer.h"
 #include "DreamTools/Renderer/Shader.h"
+#include "DreamTools/Renderer/Texture.h"
 #include "DreamTools/Renderer/VertexArray.h"
 
 #include "DreamTools/Renderer/OrthographicCamera.h"

@@ -18,6 +18,7 @@ workspace "DreamTools"
 	IncludeDir["GLAD"] = "DreamTools/vendor/GLAD/Include"
 	IncludeDir["ImGui"] = "DreamTools/vendor/imgui"
 	IncludeDir["glm"] = "DreamTools/vendor/glm"
+	IncludeDir["stb_image"] = "DreamTools/vendor/stb_image"
 
 	group "Dependencies"
 		include "DreamTools/vendor/GLFW"
@@ -45,6 +46,8 @@ project "DreamTools"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
@@ -61,7 +64,8 @@ project "DreamTools"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links
