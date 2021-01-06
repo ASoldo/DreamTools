@@ -44,7 +44,7 @@ namespace DreamTools
 	std::string OpenGLShader::ReadFile(const std::string filepath)
 	{
 		std::string result;
-		std::ifstream in(filepath, std::ios::in, std::ios::binary);
+		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 
 		if (in)
 		{
@@ -87,8 +87,10 @@ namespace DreamTools
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
-		std::vector<GLenum> glShaderIDs;
-		glShaderIDs.reserve(shaderSources.size());
+
+		DT_CORE_ASSERT(shaderSources.size() <= 2, "We Only support 2 shaders!");
+		std::array<GLenum, 2> glShaderIDs;
+		int glShaderIDIndex = 0;
 		for (auto kv : shaderSources)
 		{
 			GLenum type = kv.first;
@@ -119,7 +121,7 @@ namespace DreamTools
 				break;
 			}
 			glAttachShader(program, shader);
-			glShaderIDs.push_back(shader);
+			glShaderIDs[glShaderIDIndex++] = shader;
 		}
 
 		glLinkProgram(program);
