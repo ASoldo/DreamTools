@@ -137,7 +137,7 @@ public:
 		)";
 
 
-		m_Shader.reset(DreamTools::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = DreamTools::Shader::Create("VertexColoring", vertexSrc, fragmentSrc);
 
 		//Shader2 start
 		//Shader Source code (Vertex)
@@ -180,19 +180,19 @@ public:
 		)";
 
 
-		m_FlatColorShader.reset(DreamTools::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = DreamTools::Shader::Create("FlatColorShader", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 		//Shader2 End
 
 		//TextureShader start
 		
-		m_TextureShader.reset(DreamTools::Shader::Create("assets/shaders/Texture.glsl"));
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 		//TextureShader End
 		//Assign to m_Texture
 		m_Texture = (DreamTools::Texture2D::Create("assets/textures/DreamToolsCheckerboard.png"));
 		m_LogoTexture = (DreamTools::Texture2D::Create("assets/textures/DreamToolsLogo.png"));
 
-		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 
@@ -285,15 +285,17 @@ public:
 			}
 		}
 
+		auto textureShader = m_ShaderLibrary.Get("Texture");
+
 		m_Texture->Bind();
 		/*glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
 		DreamTools::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);*/
 
-		DreamTools::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		DreamTools::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		//DreamTools::Renderer::Submit(m_Shader, m_VertexArray);
 
 		m_LogoTexture->Bind();
-		DreamTools::Renderer::Submit(m_TextureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		DreamTools::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		DreamTools::Renderer::EndScene();
 	}
@@ -369,10 +371,12 @@ public:
 	}*/
 
 	private:
+
+		DreamTools::ShaderLibrary m_ShaderLibrary;
 		DreamTools::Ref<DreamTools::Shader> m_Shader;
 		DreamTools::Ref<DreamTools::VertexArray> m_VertexArray;
 					
-		DreamTools::Ref<DreamTools::Shader> m_TextureShader;
+		//DreamTools::Ref<DreamTools::Shader> m_TextureShader;
 
 		DreamTools::Ref<DreamTools::Shader> m_FlatColorShader;
 		DreamTools::Ref<DreamTools::VertexArray> m_SquareVertexArray;
