@@ -20,6 +20,9 @@ namespace DreamTools
 		DreamTools::OrthographicCameraController m_CameraController;
 		DreamTools::Ref<DreamTools::VertexArray> m_SquareVA;
 		DreamTools::Ref<DreamTools::Shader> m_FlatColorShader;
+
+		DreamTools::Ref<DreamTools::Texture2D> m_CheckerBoardTexture;
+
 		//DreamTools::Ref<DreamTools::Texture2D> m_Texture;
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.4f, 1.0f };
 
