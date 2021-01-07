@@ -27,6 +27,6 @@
 //---------------------------------------
 
 //Entry Point ---------------------------
-#include "DreamTools/Core/EntryPoint.h"
+//#include "DreamTools/Core/EntryPoint.h"
 //---------------------------------------
 

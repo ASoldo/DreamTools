@@ -1,4 +1,5 @@
 #include <DreamTools.h>
+#include "DreamTools/Core/EntryPoint.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
 #include "DreamTools/ImGui/ImGuiLayer.h"
@@ -8,6 +9,9 @@
 #include "../vendor/GLFW/include/GLFW/glfw3.h"
 #include "../glm/glm/gtc/matrix_transform.hpp"
 #include "../glm/glm/gtc/type_ptr.hpp"
+
+#include "Sandbox2D.h"
+
 
 
 //OpenGL Matehmatics Demo
@@ -39,7 +43,7 @@ public:
 		//OpenGL Matehmatics Demo
 		//auto cam = camera(5.0f, { 0.5f, 0.5f });
 
-		m_VertexArray.reset(DreamTools::VertexArray::Create());
+		m_VertexArray = DreamTools::VertexArray::Create();
 
 		float vertices[4 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
@@ -65,7 +69,7 @@ public:
 		indexBuffer.reset(DreamTools::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
-		m_SquareVertexArray.reset(DreamTools::VertexArray::Create());
+		m_SquareVertexArray = DreamTools::VertexArray::Create();
 
 
 		float squareVertices[5 * 4] = {
@@ -198,19 +202,8 @@ public:
 
 	void OnUpdate(DreamTools::Timestep ts) override
 	{
-		//DT_CORE_INFO("ExampleLayer::OnUpdate");
-
-		/*if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Tab))
-		{
-			DT_CORE_TRACE("Tab is pressed! (POLL)");
-		}*/
-
 		//Print Delta Time
 		//DT_CORE_TRACE("Delta Time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMillieconds());
-
-		
-
-		//Move Square
 
 		////Square Movement Start
 		//if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Right))
@@ -238,9 +231,6 @@ public:
 		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		DreamTools::RenderCommand::Clear();
 
-
-		
-
 		DreamTools::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
@@ -248,36 +238,14 @@ public:
 		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_FlatColorShader)->Bind();
 		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
 
-		for (int y = 0; y < 20; y++)
-		{
-			for (int x = 0; x < 20; x++)
-			{
-				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
-				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				
-				DreamTools::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, transform);
-			}
-		}
-
-		auto textureShader = m_ShaderLibrary.Get("Texture");
-
-		m_Texture->Bind();
-		/*glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_SquarePosition);
-		DreamTools::Renderer::Submit(m_BlueShader, m_SquareVertexArray, transform);*/
-
-		DreamTools::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-		//DreamTools::Renderer::Submit(m_Shader, m_VertexArray);
-
-		m_LogoTexture->Bind();
-		DreamTools::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		m_FlatColorShader->Bind();
+		DreamTools::Renderer::Submit(m_FlatColorShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		DreamTools::Renderer::EndScene();
 	}
 
 	virtual void OnImGuiRender() override
 	{
-		
-
 		ImGui::Begin("OpenGL Info:");
 		ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
 		ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
@@ -285,7 +253,7 @@ public:
 		ImGui::End();
 
 		ImGui::Begin("Grid Color:");
-		ImGui::ColorEdit3("Color", glm::value_ptr(m_SquareColor));
+		ImGui::ColorEdit4("Color", glm::value_ptr(m_SquareColor));
 		ImGui::End();
 
 		/*ImGui::Begin("Timestep:");
@@ -296,63 +264,14 @@ public:
 
 	void OnEvent(DreamTools::Event& e) override
 	{
-
 		m_CameraController.OnEvent(e);
-		//OLD
-		/*if (event.GetEventType() == DreamTools::EventType::KeyPressed)
-		{
-			DreamTools::KeyPressedEvent& e = (DreamTools::KeyPressedEvent&)event;
-			if (e.GetKeyCode() == DreamTools::Key::Tab)
-			{
-				DT_CORE_TRACE("{0} is pressed! (EVENT)", (char)e.GetKeyCode());
-			}
-
-			DT_CORE_TRACE("{0}", (char)e.GetKeyCode());
-		}*/
-		//DT_CORE_TRACE("{0}", event);
-
-		/*DreamTools::EventDispatcher dispatcher(event);
-		dispatcher.Dispatch<DreamTools::KeyPressedEvent>(DT_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));*/
 	}
-	//On Event Sample
-
-	/*bool OnKeyPressedEvent(DreamTools::KeyPressedEvent& event)
-	{
-		if (event.GetKeyCode() == DreamTools::Key::A)
-		{
-			m_CameraPosition.x += m_CameraSpeed;
-		}
-		else if (event.GetKeyCode() == DreamTools::Key::D)
-		{
-			m_CameraPosition.x -= m_CameraSpeed;
-		}
-		if (event.GetKeyCode() == DreamTools::Key::W)
-		{
-			m_CameraPosition.y -= m_CameraSpeed;
-		}
-		else if (event.GetKeyCode() == DreamTools::Key::S)
-		{
-			m_CameraPosition.y += m_CameraSpeed;
-		}
-
-		if (event.GetKeyCode() == DreamTools::Key::Q)
-		{
-			m_CameraRotation -= m_RotationSpeed;
-		}
-		else if (event.GetKeyCode() == DreamTools::Key::E)
-		{
-			m_CameraRotation += m_RotationSpeed;
-		}
-		return false;
-	}*/
-
+	
 	private:
 
 		DreamTools::ShaderLibrary m_ShaderLibrary;
 		DreamTools::Ref<DreamTools::Shader> m_Shader;
 		DreamTools::Ref<DreamTools::VertexArray> m_VertexArray;
-					
-		//DreamTools::Ref<DreamTools::Shader> m_TextureShader;
 
 		DreamTools::Ref<DreamTools::Shader> m_FlatColorShader;
 		DreamTools::Ref<DreamTools::VertexArray> m_SquareVertexArray;
@@ -363,9 +282,7 @@ public:
 		DreamTools::OrthographicCameraController m_CameraController;
 
 		glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.4f };
-		//Move Square
-		//float m_SquareMoveSpeed = 0.1f;
-		//glm::vec3 m_SquarePosition;
+
 };
 
 class Sandbox : public DreamTools::Application
@@ -373,7 +290,8 @@ class Sandbox : public DreamTools::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
+		//PushLayer(new ExampleLayer());
+		PushLayer(new DreamTools::Sandbox2D());
 	}
 	~Sandbox()
 	{
