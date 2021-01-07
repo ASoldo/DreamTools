@@ -62,7 +62,7 @@ namespace DreamTools
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();
 		// ^-- belongs here
-		;
+		
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

@@ -34,7 +34,7 @@ public:
 	//					|					|											|-	-	-	-	-	-	-	->	m_CameraPosition :
 	//					|					|											|						|-	->	m_CameraRotation :
 	//					|					|											|						|		
-	ExampleLayer() : Layer("Example"), m_CameraController(1024.0f / 512.0f, true)
+	ExampleLayer() : Layer("Example"), m_CameraController(1280.0f / 720.0f, true)
 	{
 		//OpenGL Matehmatics Demo
 		//auto cam = camera(5.0f, { 0.5f, 0.5f });
