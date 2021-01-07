@@ -22,7 +22,6 @@ namespace DreamTools
 		DreamTools::Ref<DreamTools::Shader> m_FlatColorShader;
 		//DreamTools::Ref<DreamTools::Texture2D> m_Texture;
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.4f, 1.0f };
-		
 
 	};
 }

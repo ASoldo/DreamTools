@@ -164,6 +164,7 @@
     <ClInclude Include="src\DreamTools\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\DreamTools\Renderer\RenderCommand.h" />
     <ClInclude Include="src\DreamTools\Renderer\Renderer.h" />
+    <ClInclude Include="src\DreamTools\Renderer\Renderer2D.h" />
     <ClInclude Include="src\DreamTools\Renderer\RendererAPI.h" />
     <ClInclude Include="src\DreamTools\Renderer\Shader.h" />
     <ClInclude Include="src\DreamTools\Renderer\Texture.h" />
@@ -604,6 +605,7 @@
     <ClCompile Include="src\DreamTools\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\DreamTools\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\RendererAPI.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Shader.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Texture.cpp" />

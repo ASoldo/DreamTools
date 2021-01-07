@@ -16,6 +16,7 @@
 
 //Renderer ---------------------------
 #include "DreamTools/Renderer/Renderer.h"
+#include "DreamTools/Renderer/Renderer2D.h"
 #include "DreamTools/Renderer/RenderCommand.h"
 
 #include "DreamTools/Renderer/Buffer.h"
