@@ -34,7 +34,7 @@ public:
 	//					|					|											|-	-	-	-	-	-	-	->	m_CameraPosition :
 	//					|					|											|						|-	->	m_CameraRotation :
 	//					|					|											|						|		
-	ExampleLayer() : Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f), m_CameraRotation(0.0f) //, m_SquarePosition({0.0f, 0.0f, 0.0f})
+	ExampleLayer() : Layer("Example"), m_CameraController(1024.0f / 512.0f, true)
 	{
 		//OpenGL Matehmatics Demo
 		//auto cam = camera(5.0f, { 0.5f, 0.5f });
@@ -208,24 +208,7 @@ public:
 		//Print Delta Time
 		//DT_CORE_TRACE("Delta Time: {0}s ({1}ms)", ts.GetSeconds(), ts.GetMillieconds());
 
-		//Camera Movement Start
-		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::A))
-		{
-			m_CameraPosition.x -= m_CameraSpeed * ts;
-		}
-		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::D))
-		{
-			m_CameraPosition.x += m_CameraSpeed * ts;
-		}
-		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::W))
-		{
-			m_CameraPosition.y += m_CameraSpeed * ts;
-		}
-		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::S))
-		{
-			m_CameraPosition.y -= m_CameraSpeed * ts;
-		}
-		//Camera Movement End
+		
 
 		//Move Square
 
@@ -248,26 +231,17 @@ public:
 		//}
 		////Square Movement End
 
-
-
-		if (DreamTools::Input::IsKeyPressed(DreamTools::Key::Q))
-		{
-			m_CameraRotation -= m_RotationSpeed * ts;
-		}
-		else if (DreamTools::Input::IsKeyPressed(DreamTools::Key::E))
-		{
-			m_CameraRotation += m_RotationSpeed * ts;
-		}
-
+		//Update
+		m_CameraController.OnUpdate(ts);
+		
+		//Renderer
 		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		DreamTools::RenderCommand::Clear();
 
 
-		//Set Camera Position
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
+		
 
-		DreamTools::Renderer::BeginScene(m_Camera);
+		DreamTools::Renderer::BeginScene(m_CameraController.GetCamera());
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -320,8 +294,10 @@ public:
 		ImGui::End();*/
 	}
 
-	void OnEvent(DreamTools::Event& event) override
+	void OnEvent(DreamTools::Event& e) override
 	{
+
+		m_CameraController.OnEvent(e);
 		//OLD
 		/*if (event.GetEventType() == DreamTools::EventType::KeyPressed)
 		{
@@ -384,11 +360,7 @@ public:
 		DreamTools::Ref<DreamTools::Texture2D> m_Texture;
 		DreamTools::Ref<DreamTools::Texture2D> m_LogoTexture;
 
-		DreamTools::OrthographicCamera m_Camera;
-		glm::vec3 m_CameraPosition;
-		float m_CameraSpeed = 0.1f;
-		float m_CameraRotation = 0.0f;
-		float m_RotationSpeed = 10.0f;
+		DreamTools::OrthographicCameraController m_CameraController;
 
 		glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.4f };
 		//Move Square
