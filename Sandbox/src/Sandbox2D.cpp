@@ -6,7 +6,6 @@
 #include "../glm/glm/gtc/matrix_transform.hpp"
 #include "../glm/glm/gtc/type_ptr.hpp"
 
-#include "Platform/OpenGL/OpenGLShader.h"
 #include "../vendor/GLFW/include/GLFW/glfw3.h"
 
 namespace DreamTools
@@ -33,11 +32,8 @@ namespace DreamTools
 		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
 		DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.5f, 0.2f, 1.0f });
+		DreamTools::Renderer2D::DrawQuad({ 0.0f, 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.4f, 0.1f, 0.7f, 1.0f });
 		DreamTools::Renderer2D::EndScene();
-		//ToDo: Add these functions Shader::SetMat4, Shader::SetFloat4
-		/*std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<DreamTools::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);*/
-
 	}
 	void Sandbox2D::OnImGuiRender()
 	{
