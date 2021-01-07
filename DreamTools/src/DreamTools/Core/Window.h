@@ -1,7 +1,7 @@
 #pragma once
 
 #include "dtpch.h"
-#include "DreamTools/Core.h"
+#include "DreamTools/Core/Core.h"
 #include "DreamTools/Events/Event.h"
 
 namespace DreamTools
@@ -19,11 +19,13 @@ namespace DreamTools
 	};
 
 	//Interface representing a desktop system based window
-	class DREAMTOOLS_API Window
+	class Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;
+
 		virtual ~Window() {};
+
 		virtual void OnUpdate() = 0;
 
 		virtual unsigned int GetWidth() const = 0;

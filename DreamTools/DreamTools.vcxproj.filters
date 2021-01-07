@@ -57,16 +57,31 @@
     <ClInclude Include="src\DreamTools.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\DreamTools\Application.h">
-      <Filter>src\DreamTools</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DreamTools\Core.h">
-      <Filter>src\DreamTools</Filter>
+    <ClInclude Include="src\DreamTools\Core\Application.h">
+      <Filter>src\DreamTools\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\DreamTools\Core\Base.h">
       <Filter>src\DreamTools\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Core\Core.h">
+      <Filter>src\DreamTools\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Core\EntryPoint.h">
+      <Filter>src\DreamTools\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Core\Input.h">
+      <Filter>src\DreamTools\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\DreamTools\Core\KeyCodes.h">
+      <Filter>src\DreamTools\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Core\Layer.h">
+      <Filter>src\DreamTools\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Core\LayerStack.h">
+      <Filter>src\DreamTools\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Core\Log.h">
       <Filter>src\DreamTools\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\DreamTools\Core\MouseCodes.h">
@@ -75,8 +90,8 @@
     <ClInclude Include="src\DreamTools\Core\Timestep.h">
       <Filter>src\DreamTools\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\DreamTools\EntryPoint.h">
-      <Filter>src\DreamTools</Filter>
+    <ClInclude Include="src\DreamTools\Core\Window.h">
+      <Filter>src\DreamTools\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\DreamTools\Events\ApplicationEvent.h">
       <Filter>src\DreamTools\Events</Filter>
@@ -93,18 +108,6 @@
     <ClInclude Include="src\DreamTools\ImGui\ImGuiLayer.h">
       <Filter>src\DreamTools\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\DreamTools\Input.h">
-      <Filter>src\DreamTools</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DreamTools\Layer.h">
-      <Filter>src\DreamTools</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DreamTools\LayerStack.h">
-      <Filter>src\DreamTools</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DreamTools\Log.h">
-      <Filter>src\DreamTools</Filter>
-    </ClInclude>
     <ClInclude Include="src\DreamTools\Renderer\Buffer.h">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClInclude>
@@ -112,6 +115,9 @@
       <Filter>src\DreamTools\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\DreamTools\Renderer\OrthographicCamera.h">
+      <Filter>src\DreamTools\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Renderer\OrthographicCameraController.h">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\DreamTools\Renderer\RenderCommand.h">
@@ -131,12 +137,6 @@
     </ClInclude>
     <ClInclude Include="src\DreamTools\Renderer\VertexArray.h">
       <Filter>src\DreamTools\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DreamTools\Window.h">
-      <Filter>src\DreamTools</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Input.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
@@ -1407,11 +1407,19 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\DreamTools\OrthographicCameraController.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DreamTools\Application.cpp">
-      <Filter>src\DreamTools</Filter>
+    <ClCompile Include="src\DreamTools\Core\Application.cpp">
+      <Filter>src\DreamTools\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DreamTools\Core\Layer.cpp">
+      <Filter>src\DreamTools\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DreamTools\Core\LayerStack.cpp">
+      <Filter>src\DreamTools\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DreamTools\Core\Log.cpp">
+      <Filter>src\DreamTools\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\DreamTools\ImGui\ImGuiBuild.cpp">
       <Filter>src\DreamTools\ImGui</Filter>
@@ -1419,19 +1427,13 @@
     <ClCompile Include="src\DreamTools\ImGui\ImGuiLayer.cpp">
       <Filter>src\DreamTools\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\DreamTools\Layer.cpp">
-      <Filter>src\DreamTools</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DreamTools\LayerStack.cpp">
-      <Filter>src\DreamTools</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DreamTools\Log.cpp">
-      <Filter>src\DreamTools</Filter>
-    </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\Buffer.cpp">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\OrthographicCamera.cpp">
+      <Filter>src\DreamTools\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DreamTools\Renderer\OrthographicCameraController.cpp">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\RenderCommand.cpp">
@@ -1482,6 +1484,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\DreamTools\OrthographicCameraController.cpp" />
   </ItemGroup>
 </Project>

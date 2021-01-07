@@ -11,10 +11,12 @@ namespace DreamTools
 		KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
+
 	protected:
 		KeyEvent(const KeyCode keycode) : m_KeyCode(keycode){}
 
 		KeyCode m_KeyCode;
+
 	};
 
 	class KeyPressedEvent : public KeyEvent
@@ -33,6 +35,7 @@ namespace DreamTools
 
 	private:
 		uint16_t m_RepeatCount;
+
 	};
 
 	class KeyReleasedEvent : public KeyEvent

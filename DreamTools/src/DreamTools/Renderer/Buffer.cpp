@@ -4,15 +4,14 @@
 #include "Renderer.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
 
-
 namespace DreamTools
 {
 	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:    DT_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return new OpenGLVertexBuffer(vertices, size);
+			case RendererAPI::API::None:    DT_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+			case RendererAPI::API::OpenGL:  return new OpenGLVertexBuffer(vertices, size);
 		}
 
 		DT_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -23,8 +22,8 @@ namespace DreamTools
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:    DT_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return new OpenGLIndexBuffer(indices, count);
+			case RendererAPI::API::None:    DT_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+			case RendererAPI::API::OpenGL:  return new OpenGLIndexBuffer(indices, count);
 		}
 
 		DT_CORE_ASSERT(false, "Unknown RendererAPI!");

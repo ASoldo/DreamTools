@@ -1,5 +1,5 @@
 #pragma once
-#include "../Core.h"
+#include "../Core/Core.h"
 #include "../Core/Base.h"
 
 namespace DreamTools
@@ -29,11 +29,11 @@ namespace DreamTools
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	class DREAMTOOLS_API Event
+	class Event
 	{
 		friend class EventDispatcher;
-	public:
 
+	public:
 		virtual ~Event() = default;
 
 		bool Handled = false;
@@ -47,16 +47,19 @@ namespace DreamTools
 		{
 			return GetCategoryFlags() & category;
 		}
+
 	protected:
 		bool m_Handled = false;
 	};
 
-	class DREAMTOOLS_API EventDispatcher
+	class EventDispatcher
 	{
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;
+
 	public:
 		EventDispatcher(Event& event) : m_Event(event){}
+
 		template<typename T>
 		bool Dispatch(EventFn<T> func) {
 			if (m_Event.GetEventType() == T::GetStaticType())
@@ -66,8 +69,10 @@ namespace DreamTools
 			}
 			return false;
 		}
+
 	private:
 		Event& m_Event;
+
 	};
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{

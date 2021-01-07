@@ -1,18 +1,18 @@
 #pragma once
 
 //For Use by DreamTools Applications
-#include "DreamTools/Application.h"
-#include "DreamTools/Layer.h"
-#include "DreamTools/Log.h"
+#include "DreamTools/Core/Application.h"
+#include "DreamTools/Core/Layer.h"
+#include "DreamTools/Core/Log.h"
 
 #include "DreamTools/Core/Timestep.h"
 
-#include "DreamTools/Input.h"
+#include "DreamTools/Core/Input.h"
 #include "DreamTools/Core/KeyCodes.h"
 #include "DreamTools/Core/MouseCodes.h"
 
 #include "DreamTools/ImGui/ImGuiLayer.h"
-#include "DreamTools/OrthographicCameraController.h"
+#include "DreamTools/Renderer/OrthographicCameraController.h"
 
 //Renderer ---------------------------
 #include "DreamTools/Renderer/Renderer.h"
@@ -27,6 +27,6 @@
 //---------------------------------------
 
 //Entry Point ---------------------------
-#include "DreamTools/EntryPoint.h"
+#include "DreamTools/Core/EntryPoint.h"
 //---------------------------------------
 

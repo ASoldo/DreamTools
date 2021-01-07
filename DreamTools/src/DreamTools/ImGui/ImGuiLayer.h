@@ -1,5 +1,5 @@
 #pragma once
-#include "DreamTools/Layer.h"
+#include "DreamTools/Core/Layer.h"
 #include "DreamTools/Events/KeyEvent.h"
 #include "DreamTools/Events/MouseEvent.h"
 #include "DreamTools/Events/ApplicationEvent.h"
@@ -22,5 +22,6 @@ namespace DreamTools
 
 	private:
 		float m_Time = 0.0f;
+
 	};
 }

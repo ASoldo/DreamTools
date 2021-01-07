@@ -22,12 +22,13 @@ namespace DreamTools
 
 		EVENT_CLASS_TYPE(WindowResize);
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
+
 	private:
 		unsigned int m_Width;
 		unsigned int m_Height;
 	};
 
-	class DREAMTOOLS_API WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() = default;
@@ -36,7 +37,7 @@ namespace DreamTools
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
 	};
 
-	class DREAMTOOLS_API AppTickEvent : public Event
+	class AppTickEvent : public Event
 	{
 	public:
 		AppTickEvent() = default;
@@ -45,7 +46,7 @@ namespace DreamTools
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
 	};
 
-	class DREAMTOOLS_API AppUpdateEvent : public Event
+	class AppUpdateEvent : public Event
 	{
 		AppUpdateEvent() = default;
 
@@ -53,7 +54,7 @@ namespace DreamTools
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
 	};
 
-	class DREAMTOOLS_API AppRenderEvent : public Event
+	class AppRenderEvent : public Event
 	{
 		AppRenderEvent() = default;
 

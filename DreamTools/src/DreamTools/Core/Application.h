@@ -1,9 +1,9 @@
 #pragma once
 #include "Core.h"
 #include "Window.h"
-#include "DreamTools/LayerStack.h"
+#include "DreamTools/Core/LayerStack.h"
 #include "DreamTools/Events/Event.h"
-#include "Events/ApplicationEvent.h"
+#include "../Events/ApplicationEvent.h"
 
 #include "DreamTools/Core/Timestep.h"
 #include "DreamTools/ImGui/ImGuiLayer.h"
@@ -36,6 +36,7 @@ namespace DreamTools
 
 		LayerStack m_LayerStack;
 		float m_LastFrameTime = 0.0f;
+
 	private:
 		static Application* s_Instance;
 	};

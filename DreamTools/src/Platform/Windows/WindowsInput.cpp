@@ -1,20 +1,16 @@
 #include "dtpch.h"
 #include "WindowsInput.h"
-
-#include "DreamTools/Application.h"
+#include "../../DreamTools/Core/Application.h"
 #include <../vendor/GLFW/include/GLFW/glfw3.h>
-
 
 namespace DreamTools
 {
-
 	Input* Input::s_Instance = new WindowsInput();
 
 	bool WindowsInput::IsKeyPressedImpl(int keycode)
 	{
 		auto window =static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, keycode);
-
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
@@ -42,8 +38,6 @@ namespace DreamTools
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double xPos, yPos;
 		glfwGetCursorPos(window, &xPos, &yPos);
-
 		return { (float)xPos, (float)yPos };
 	}
-
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DreamTools/Core.h"
+#include "DreamTools/Core/Core.h"
 #include "DreamTools/Core/Timestep.h"
 #include "DreamTools/Events/Event.h"
 
@@ -19,6 +19,7 @@ namespace DreamTools
 		virtual void OnEvent(Event& event) {}
 
 		inline const std::string& GetName() const { return m_DebugName; }
+
 	protected:
 		std::string m_DebugName;
 	};

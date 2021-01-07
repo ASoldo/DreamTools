@@ -39,6 +39,7 @@ namespace DreamTools
 
 		m_Name = filepath.substr(lastSlash, count);
 	}
+
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) 
 		: m_Name(name)
 	{
@@ -47,6 +48,7 @@ namespace DreamTools
 		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
 		Compile(sources);
 	}
+
 	OpenGLShader::~OpenGLShader()
 	{
 		glDeleteProgram(m_RendererID);
@@ -106,24 +108,19 @@ namespace DreamTools
 		{
 			GLenum type = kv.first;
 			const std::string& source = kv.second;
-
 			GLuint shader = glCreateShader(type);
-
 			const GLchar* sourceCstr = source.c_str();
 			glShaderSource(shader, 1, &sourceCstr, 0);
-
 			glCompileShader(shader);
-
 			GLint isCompiled = 0;
 			glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
+
 			if (isCompiled == GL_FALSE)
 			{
 				GLint maxLength = 0;
 				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
-
 				std::vector<GLchar> infoLog(maxLength);
 				glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
-
 				glDeleteShader(shader);
 
 				DT_CORE_ERROR("{0}", infoLog.data());
@@ -136,17 +133,15 @@ namespace DreamTools
 		}
 
 		glLinkProgram(program);
-
 		GLint isLinked = 0;
 		glGetProgramiv(program, GL_LINK_STATUS, (int*)&isLinked);
+
 		if (isLinked == GL_FALSE)
 		{
 			GLint maxLength = 0;
 			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
-
 			std::vector<GLchar> infoLog(maxLength);
 			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);
-
 			glDeleteProgram(program);
 
 			for (auto id : glShaderIDs)
@@ -172,40 +167,48 @@ namespace DreamTools
 	{
 		glUseProgram(m_RendererID);
 	}
+
 	void OpenGLShader::Unbind() const
 	{
 		glUseProgram(0);
 	}
+
 	void OpenGLShader::UploadUniformInt(const std::string& name, int values)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1i(location, values);
 	}
+
 	void OpenGLShader::UploadUniformFloat(const std::string& name, float values)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1f(location, values);
 	}
+
 	void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2& values)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform2f(location, values.x, values.y);
 	}
+
 	void OpenGLShader::UploadUniformFloat3(const std::string& name, const glm::vec3& values)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform3f(location, values.x, values.y, values.z);
 	}
+
 	void OpenGLShader::UploadUniformFloat4(const std::string& name, const glm::vec4& values)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform4f(location, values.x, values.y, values.z, values.w);
 	}
+
 	void OpenGLShader::UploadUniformMat3(const std::string& name, const glm::mat3& matrix)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
+
 	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
 	{
 		GLint location = glGetUniformLocation(m_RendererID, name.c_str());

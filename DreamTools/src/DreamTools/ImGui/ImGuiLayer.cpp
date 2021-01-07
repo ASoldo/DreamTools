@@ -7,8 +7,8 @@
 #include "examples/imgui_impl_opengl3.h"
 
 
-#include "DreamTools/Application.h"
-#include "../Core.h"
+#include "DreamTools/Core/Application.h"
+#include "../Core/Core.h"
 
 //Temp
 #include <../vendor/GLFW/include/GLFW/glfw3.h>
@@ -79,9 +79,6 @@ namespace DreamTools
 	{
 		static bool show = true;
 		ImGui::ShowDemoWindow(&show);
-
-		/*ImGui::Begin("");
-		ImGui::End();*/
 	}
 
 	/*void ImGuiLayer::OnUpdate()
@@ -114,5 +111,4 @@ namespace DreamTools
 			glfwMakeContextCurrent(backup_Current_context);
 		}
 	}
-
 }

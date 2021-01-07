@@ -2,10 +2,9 @@
 #include "../Events/Event.h"
 #include "../Core/MouseCodes.h"
 
-
 namespace DreamTools
 {
-	class DREAMTOOLS_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(const float x, const float y) : m_MouseX(x), m_MouseY(y){}
@@ -25,9 +24,10 @@ namespace DreamTools
 
 	private:
 		float m_MouseX, m_MouseY;
+
 	};
 
-	class DREAMTOOLS_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(const float xOffset, const float yOffset) : m_OffsetX(xOffset), m_OffsetY(yOffset){}
@@ -47,9 +47,10 @@ namespace DreamTools
 
 	private:
 		float m_OffsetX, m_OffsetY;
+
 	};
 
-	class DREAMTOOLS_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		MouseCode GetMouseButton() const { return m_Button; }
@@ -60,7 +61,7 @@ namespace DreamTools
 		MouseCode m_Button;
 	};
 
-	class DREAMTOOLS_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(const MouseCode button) : MouseButtonEvent(button){}

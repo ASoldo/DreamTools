@@ -1,8 +1,8 @@
 #include "dtpch.h"
 #include "Application.h"
-#include "Events/ApplicationEvent.h"
-#include "Events/Event.h"
-//#include "../vendor/GLFW/include/GLFW/glfw3.h"
+#include "../Events/ApplicationEvent.h"
+#include "../Events/Event.h"
+
 #include <glad/glad.h>
 #include "DreamTools/Renderer/Renderer.h"
 #include "DreamTools/Renderer/RenderCommand.h"
@@ -19,22 +19,18 @@ namespace DreamTools
 	Application::Application()
 	{
 		DT_CORE_ASSERT(!s_Instance, "Application is already running!");
+
 		s_Instance = this;
 		m_Window = Scope<Window>(Window::Create());
 		
 		//Resize Console App
 		HWND console = GetConsoleWindow();
-		//MoveWindow(window_handle, x, y, width, height, redraw_window);
-		MoveWindow(console, 0, 0, 800, 500, TRUE);
-
+		MoveWindow(console, 0, 0, 800, 500, TRUE); //MoveWindow(window_handle, x, y, width, height, redraw_window);
 		WindowResizeEvent e(1280, 720);
 
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
-
 		Renderer::Init();
-
 		m_Window->SetVSync(true);
-
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 	}
@@ -94,8 +90,6 @@ namespace DreamTools
 
 	void Application::Run()
 	{
-		//WindowResizeEvent e(1280, 720);
-		
 		///Main game Loop
 		while (m_Running)
 		{
@@ -112,14 +106,12 @@ namespace DreamTools
 			}
 
 			m_ImGuiLayer->Begin();
-
 			for (Layer* layer : m_LayerStack)
 			{
 				layer->OnImGuiRender();
 			}
 
 			m_ImGuiLayer->End();
-
 			m_Window->OnUpdate();
 		}
 	}

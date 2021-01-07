@@ -1,13 +1,10 @@
 #include "dtpch.h"
 #include "OpenGLBuffer.h"
-
 #include <glad/glad.h>
 
 namespace DreamTools
 {
-	
 	//VertexBuffer
-
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
 	{
 		glCreateBuffers(1, &m_RendererID);
@@ -31,7 +28,6 @@ namespace DreamTools
 	}
 
 	// IndexBuffer 
-
 	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count)
 		: m_Count(count)
 	{

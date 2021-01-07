@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace DreamTools
 {
 	using MouseCode = uint16_t;

@@ -1,6 +1,6 @@
 #include "dtpch.h"
 #include "OrthographicCameraController.h"
-#include "DreamTools/Input.h"
+#include "DreamTools/Core/Input.h"
 #include "DreamTools//Core/KeyCodes.h"
 
 namespace DreamTools

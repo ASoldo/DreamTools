@@ -1,5 +1,5 @@
 #pragma once
-#include "DreamTools/Input.h"
+#include "DreamTools/Core/Input.h"
 
 namespace DreamTools
 {

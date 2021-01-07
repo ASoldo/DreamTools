@@ -1,11 +1,8 @@
 #pragma once
 
-#include "DreamTools/Window.h"
-
+#include "DreamTools/Core/Window.h"
 #include "DreamTools/Renderer/GraphicsContext.h"
 #include "../vendor/GLFW/include/GLFW/glfw3.h"
-
-
 
 struct GLFWWindow;
 

@@ -1,4 +1,5 @@
 #pragma once
+//Precompiled Header
 
 #include <iostream>
 #include <memory>
@@ -15,7 +16,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "DreamTools/Log.h"
+#include "DreamTools/Core/Log.h"
 #include <bitset>
 #include <vector>
 

@@ -141,34 +141,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\DreamTools.h" />
-    <ClInclude Include="src\DreamTools\Application.h" />
-    <ClInclude Include="src\DreamTools\Core.h" />
+    <ClInclude Include="src\DreamTools\Core\Application.h" />
     <ClInclude Include="src\DreamTools\Core\Base.h" />
+    <ClInclude Include="src\DreamTools\Core\Core.h" />
+    <ClInclude Include="src\DreamTools\Core\EntryPoint.h" />
+    <ClInclude Include="src\DreamTools\Core\Input.h" />
     <ClInclude Include="src\DreamTools\Core\KeyCodes.h" />
+    <ClInclude Include="src\DreamTools\Core\Layer.h" />
+    <ClInclude Include="src\DreamTools\Core\LayerStack.h" />
+    <ClInclude Include="src\DreamTools\Core\Log.h" />
     <ClInclude Include="src\DreamTools\Core\MouseCodes.h" />
     <ClInclude Include="src\DreamTools\Core\Timestep.h" />
-    <ClInclude Include="src\DreamTools\EntryPoint.h" />
+    <ClInclude Include="src\DreamTools\Core\Window.h" />
     <ClInclude Include="src\DreamTools\Events\ApplicationEvent.h" />
     <ClInclude Include="src\DreamTools\Events\Event.h" />
     <ClInclude Include="src\DreamTools\Events\KeyEvent.h" />
     <ClInclude Include="src\DreamTools\Events\MouseEvent.h" />
     <ClInclude Include="src\DreamTools\ImGui\ImGuiLayer.h" />
-    <ClInclude Include="src\DreamTools\Input.h" />
-    <ClInclude Include="src\DreamTools\Layer.h" />
-    <ClInclude Include="src\DreamTools\LayerStack.h" />
-    <ClInclude Include="src\DreamTools\Log.h" />
-    <ClInclude Include="src\DreamTools\OrthographicCameraController.h" />
     <ClInclude Include="src\DreamTools\Renderer\Buffer.h" />
     <ClInclude Include="src\DreamTools\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\DreamTools\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\DreamTools\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\DreamTools\Renderer\RenderCommand.h" />
     <ClInclude Include="src\DreamTools\Renderer\Renderer.h" />
     <ClInclude Include="src\DreamTools\Renderer\RendererAPI.h" />
     <ClInclude Include="src\DreamTools\Renderer\Shader.h" />
     <ClInclude Include="src\DreamTools\Renderer\Texture.h" />
     <ClInclude Include="src\DreamTools\Renderer\VertexArray.h" />
-    <ClInclude Include="src\DreamTools\Window.h" />
-    <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -594,15 +593,15 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DreamTools\Application.cpp" />
+    <ClCompile Include="src\DreamTools\Core\Application.cpp" />
+    <ClCompile Include="src\DreamTools\Core\Layer.cpp" />
+    <ClCompile Include="src\DreamTools\Core\LayerStack.cpp" />
+    <ClCompile Include="src\DreamTools\Core\Log.cpp" />
     <ClCompile Include="src\DreamTools\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\DreamTools\ImGui\ImGuiLayer.cpp" />
-    <ClCompile Include="src\DreamTools\Layer.cpp" />
-    <ClCompile Include="src\DreamTools\LayerStack.cpp" />
-    <ClCompile Include="src\DreamTools\Log.cpp" />
-    <ClCompile Include="src\DreamTools\OrthographicCameraController.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Buffer.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\DreamTools\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Renderer.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\RendererAPI.cpp" />

@@ -33,9 +33,6 @@ project "DreamTools"
 	cppdialect "C++17"
 	staticruntime "on"
 	
-
-	
-
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -78,7 +75,6 @@ project "DreamTools"
 
 	filter "system:windows"
 		
-		
 		systemversion "latest"
 
 	defines
@@ -113,9 +109,6 @@ project "DreamTools"
 		cppdialect "C++17"
 		staticruntime "on"
 
-
-
-
 		targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 		objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -138,10 +131,10 @@ project "DreamTools"
 		"DreamTools"
 	}
 
-	filter "system:windows"
+	--filter "system:windows"
 		
-		staticruntime "on"
-		systemversion "latest"
+		--staticruntime "on"
+		--systemversion "latest"
 
 	defines
 	{

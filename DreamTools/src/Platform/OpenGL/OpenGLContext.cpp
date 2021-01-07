@@ -6,7 +6,6 @@
 
 namespace DreamTools
 {
-
 	OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : m_WindowHandle(windowHandle)
 	{
 		DT_CORE_ASSERT(windowHandle, "Window handle is null!");
@@ -29,5 +28,4 @@ namespace DreamTools
 	{
 		glfwSwapBuffers(m_WindowHandle);
 	}
-
 }

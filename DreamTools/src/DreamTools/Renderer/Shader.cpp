@@ -3,7 +3,6 @@
 #include "Renderer.h"
 #include "../../Platform/OpenGL/OpenGLShader.h"
 
-
 namespace DreamTools
 {
 	Ref<Shader> Shader::Create(const std::string& filepath)
@@ -22,8 +21,8 @@ namespace DreamTools
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:    DT_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
+			case RendererAPI::API::None:    DT_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+			case RendererAPI::API::OpenGL:  return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
 		}
 
 		DT_CORE_ASSERT(false, "Unknown RendererAPI!");
@@ -32,7 +31,6 @@ namespace DreamTools
 
 	void ShaderLibrary::Add(const std::string& name, const Ref<Shader>& shader)
 	{
-		
 		DT_CORE_ASSERT(!Exists(name), "Duplicate shader. Shader already exists!")
 		m_Shaders[name] = shader;
 	}
