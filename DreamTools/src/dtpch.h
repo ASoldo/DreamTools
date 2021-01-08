@@ -17,6 +17,7 @@
 #include <unordered_set>
 
 #include "DreamTools/Core/Log.h"
+#include "DreamTools/Debug/Instrumentator.h"
 #include <bitset>
 #include <vector>
 
