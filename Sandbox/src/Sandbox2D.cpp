@@ -30,11 +30,10 @@ namespace DreamTools
 		DreamTools::RenderCommand::Clear();
 
 		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
-
 		DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 100.0f, 100.0f }, m_CheckerBoardTexture);
-		DreamTools::Renderer2D::DrawQuad({ -0.5f, -0.5f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.5f, 0.2f, 1.0f });
-		DreamTools::Renderer2D::DrawQuad({ -0.5f, 0.5f, 0.0f }, { 1.0f, 1.0f }, { 0.4f, 0.1f, 0.7f, 1.0f });
-		DreamTools::Renderer2D::DrawQuad({ 0.5f, 0.5f, 0.0f }, { 1.0f, 1.0f }, { 0.6f, 1.0f, 0.5f, 1.0f });
+		DreamTools::Renderer2D::DrawQuad({ -0.5f, -0.5f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 0.8f, 1.0f, 1.0f });
+		DreamTools::Renderer2D::DrawQuad({ -0.5f, -1.5f, 0.0f }, { 1.0f, 1.0f }, { 0.4f, 0.8f, 1.0f, 1.0f });
+		DreamTools::Renderer2D::DrawQuad({ -0.5f, -2.5f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.8f, 0.0f, 1.0f });
 		
 		DreamTools::Renderer2D::EndScene();
 	}
