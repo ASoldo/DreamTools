@@ -10,6 +10,8 @@ namespace DreamTools
 		: m_Width(width)
 		, m_Height(height)
 	{
+		DT_PROFILE_FUNCTION();
+
 		m_InternalFormat = GL_RGBA8;
 		m_DataFormat = GL_RGBA;
 
@@ -24,6 +26,8 @@ namespace DreamTools
 	}
 	OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : m_Path(path)
 	{
+		DT_PROFILE_FUNCTION();
+
 		int width;
 		int height;
 		int channels;
@@ -31,7 +35,11 @@ namespace DreamTools
 		//Invert Image because OpenGL expects image to be from bottom to top and stbi is giving us from top to bottom
 		stbi_set_flip_vertically_on_load(1);
 
-		stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		stbi_uc* data = nullptr;
+		{
+			DT_PROFILE_SCOPE("stbi_load - OpenGLTexture2D::OpenGLTexture2D(const std::string&)");
+			data = stbi_load(path.c_str(), &width, &height, &channels, 0);
+		}
 		DT_CORE_ASSERT(data, "Failed to load image!");
 
 		m_Width = width;
@@ -73,16 +81,22 @@ namespace DreamTools
 	}
 	OpenGLTexture2D::~OpenGLTexture2D()
 	{
+		DT_PROFILE_FUNCTION();
+
 		glDeleteTextures(1, &m_RendererID);
 	}
 	void OpenGLTexture2D::SetData(void* data, uint32_t size)
 	{
+		DT_PROFILE_FUNCTION();
+
 		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
 		DT_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be intire texture!");
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 	}
 	void OpenGLTexture2D::Bind(uint32_t slot) const
 	{
+		DT_PROFILE_FUNCTION();
+
 		glBindTextureUnit(slot, m_RendererID);
 	}
 }

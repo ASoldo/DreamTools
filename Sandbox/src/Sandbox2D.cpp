@@ -14,25 +14,24 @@ namespace DreamTools
 {
 	Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, true)
 	{
-		m_CheckerBoardTexture = (DreamTools::Texture2D::Create("assets/textures/DreamToolsCheckerboard.png"));
 	}
 
 	void Sandbox2D::OnAttach()
 	{
-		
+		DT_PROFILE_FUNCTION();
+
+		m_CheckerBoardTexture = (DreamTools::Texture2D::Create("assets/textures/DreamToolsCheckerboard.png"));
 	}
 	void Sandbox2D::OnDetach()
 	{
+		DT_PROFILE_FUNCTION();
+
 	}
 	void Sandbox2D::OnUpdate(DreamTools::Timestep ts)
 	{
 		DT_PROFILE_FUNCTION();
 
-		{
-			DT_PROFILE_SCOPE("m_CameraController.OnUpdate");
-			m_CameraController.OnUpdate(ts);
-		}
-		
+		m_CameraController.OnUpdate(ts);
 
 		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		DreamTools::RenderCommand::Clear();

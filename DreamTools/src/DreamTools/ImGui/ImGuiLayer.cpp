@@ -31,6 +31,8 @@ namespace DreamTools
 
 	void ImGuiLayer::OnAttach()
 	{
+		DT_PROFILE_FUNCTION();
+
 		//Setup Dear Gui Context
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -70,6 +72,8 @@ namespace DreamTools
 
 	void ImGuiLayer::OnDetach()
 	{
+		DT_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -88,6 +92,8 @@ namespace DreamTools
 
 	void ImGuiLayer::Begin()
 	{
+		DT_PROFILE_FUNCTION();
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -95,6 +101,8 @@ namespace DreamTools
 
 	void ImGuiLayer::End()
 	{
+		DT_PROFILE_FUNCTION();
+
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::Get();
 		io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());

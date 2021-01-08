@@ -13,6 +13,8 @@ namespace DreamTools
 
 	void OpenGLContext::Init()
 	{
+		DT_PROFILE_FUNCTION();
+
 		glfwMakeContextCurrent(m_WindowHandle);
 
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -26,6 +28,7 @@ namespace DreamTools
 
 	void OpenGLContext::SwapBuffers()
 	{
+		DT_PROFILE_FUNCTION();
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

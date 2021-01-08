@@ -15,6 +15,8 @@ namespace DreamTools
 
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
+		DT_PROFILE_FUNCTION();
+
 		//Camera Movement Start
 		if (Input::IsKeyPressed(DreamTools::Key::A))
 		{
@@ -54,12 +56,16 @@ namespace DreamTools
 	}
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
+		DT_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<MouseScrolledEvent>(DT_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 		dispatcher.Dispatch<WindowResizeEvent>(DT_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 	}
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent& e)
 	{
+		DT_PROFILE_FUNCTION();
+
 		m_ZoomLevel -= e.GetOffsetY() * 0.1f;
 		m_ZoomLevel = std::max(m_ZoomLevel, 0.05f);
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
@@ -67,6 +73,8 @@ namespace DreamTools
 	}
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
+		DT_PROFILE_FUNCTION();
+
 		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 		return false;

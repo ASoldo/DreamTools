@@ -11,6 +11,8 @@ namespace DreamTools
 
 	void Renderer::Init()
 	{
+		DT_PROFILE_FUNCTION();
+
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}

@@ -18,6 +18,8 @@ namespace DreamTools
 
 	void Renderer2D::Init()
 	{
+		DT_PROFILE_FUNCTION();
+
 		s_Data = new Renderer3DStorage();
 		s_Data->QuadVertexArray = VertexArray::Create();
 
@@ -56,11 +58,15 @@ namespace DreamTools
 	}
 	void Renderer2D::Shutdown()
 	{
+		DT_PROFILE_FUNCTION();
+
 		delete s_Data;
 	}
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
+		DT_PROFILE_FUNCTION();
+
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 
@@ -68,7 +74,7 @@ namespace DreamTools
 
 	void Renderer2D::EndScene()
 	{
-
+		DT_PROFILE_FUNCTION();
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
@@ -78,6 +84,8 @@ namespace DreamTools
 
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
+		DT_PROFILE_FUNCTION();
+
 		s_Data->TextureShader->SetFloat4("u_Color", color);
 		//bind our texture
 		s_Data->WhiteTexture->Bind();
@@ -95,6 +103,8 @@ namespace DreamTools
 	}
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture)
 	{
+		DT_PROFILE_FUNCTION();
+
 		s_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
 		texture->Bind();
 

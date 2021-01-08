@@ -18,6 +18,7 @@ namespace DreamTools
 
 	Application::Application()
 	{
+		DT_PROFILE_FUNCTION();
 		DT_CORE_ASSERT(!s_Instance, "Application is already running!");
 
 		s_Instance = this;
@@ -37,6 +38,8 @@ namespace DreamTools
 
 	void Application::OnEvent(Event& e)
 	{
+		DT_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
@@ -60,6 +63,8 @@ namespace DreamTools
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		DT_PROFILE_FUNCTION();
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;
@@ -73,45 +78,60 @@ namespace DreamTools
 
 	void Application::PushLayer(Layer* layer)
 	{
+		DT_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
+		DT_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverlay(layer);
 		layer->OnAttach();
 	}
 
 	Application::~Application()
 	{
-
+		DT_PROFILE_FUNCTION();
 	}
 
 	void Application::Run()
 	{
+		DT_PROFILE_FUNCTION();
+
 		///Main game Loop
 		while (m_Running)
 		{
+			DT_PROFILE_SCOPE("Main Game Loop");
+
 			float time = (float)glfwGetTime(); //Platform::GetTime()
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
 			if (!m_Minimized)
 			{
-				for (Layer* layer : m_LayerStack)
 				{
-					layer->OnUpdate(timestep);
+					DT_PROFILE_SCOPE("LayerStack OnUpdate");
+					for (Layer* layer : m_LayerStack)
+					{
+						layer->OnUpdate(timestep);
+					}
 				}
 			}
 
 			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
 			{
-				layer->OnImGuiRender();
-			}
+				DT_PROFILE_SCOPE("LayerStack OnImGuiRender");
 
+				for (Layer* layer : m_LayerStack)
+				{
+					layer->OnImGuiRender();
+				}
+			}
 			m_ImGuiLayer->End();
+
 			m_Window->OnUpdate();
 		}
 	}
