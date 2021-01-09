@@ -37,7 +37,8 @@ namespace DreamTools
 		DreamTools::RenderCommand::Clear();
 
 		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
-		//DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 100.0f, 100.0f }, m_CheckerBoardTexture, 10.0f, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+		DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f }, m_CheckerBoardTexture, 10.0f);
+		DreamTools::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.1f }, { 1.0f, 1.0f }, m_CheckerBoardTexture, 20.0f);
 		//DreamTools::Renderer2D::DrawRotatedQuad({ -0.5f, -0.5f, 0.0f }, { 1.0f, 1.0f }, glm::radians(45.0f), { 0.2f, 0.8f, 0.6f, 1.0f });
 		DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
 		DreamTools::Renderer2D::DrawQuad({ 0.0f, -1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.2f, 0.3f, 0.8f, 1.0f });
