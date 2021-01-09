@@ -33,14 +33,14 @@ namespace DreamTools
 
 		m_CameraController.OnUpdate(ts);
 
-		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
+		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		DreamTools::RenderCommand::Clear();
 
 		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
-		DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 100.0f, 100.0f }, m_CheckerBoardTexture, 10.0f, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-		DreamTools::Renderer2D::DrawRotatedQuad({ -0.5f, -0.5f, 0.0f }, { 1.0f, 1.0f }, glm::radians(45.0f), { 0.2f, 0.8f, 0.6f, 1.0f });
-		DreamTools::Renderer2D::DrawQuad({ -0.5f, -1.5f, 0.0f }, { 1.0f, 1.0f }, { 0.4f, 0.8f, 1.0f, 1.0f });
-		DreamTools::Renderer2D::DrawQuad({ -0.5f, -2.5f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.8f, 0.0f, 1.0f });
+		//DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 100.0f, 100.0f }, m_CheckerBoardTexture, 10.0f, glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+		//DreamTools::Renderer2D::DrawRotatedQuad({ -0.5f, -0.5f, 0.0f }, { 1.0f, 1.0f }, glm::radians(45.0f), { 0.2f, 0.8f, 0.6f, 1.0f });
+		DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
+		DreamTools::Renderer2D::DrawQuad({ 0.0f, -1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.2f, 0.3f, 0.8f, 1.0f });
 		
 		DreamTools::Renderer2D::EndScene();
 	}
@@ -54,13 +54,13 @@ namespace DreamTools
 		ImGui::Text("Version: %s", glGetString(GL_VERSION));
 		ImGui::End();
 
-		ImGui::Begin("Square Color:");
+		/*ImGui::Begin("Square Color:");
 		ImGui::ColorEdit3("Color", glm::value_ptr(m_SquareColor));
 		ImGui::End();
 
 		ImGui::Begin("Profiling:");
 
-		ImGui::End();
+		ImGui::End();*/
 	}
 	void Sandbox2D::OnEvent(DreamTools::Event& e)
 	{

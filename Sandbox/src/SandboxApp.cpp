@@ -51,8 +51,7 @@ public:
 			0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 			-0.5f, 0.5, 0.0f, 1.0f, 1.0f, 0.5f, 1.0f
 		};
-		DreamTools::Ref<DreamTools::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(DreamTools::VertexBuffer::Create(vertices, sizeof(vertices)));
+		DreamTools::Ref<DreamTools::VertexBuffer> vertexBuffer = DreamTools::VertexBuffer::Create(vertices, sizeof(vertices));
 
 		DreamTools::BufferLayout layout =
 		{
@@ -65,8 +64,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[6] = { 0, 1, 2, 2, 3, 0 };
-		DreamTools::Ref<DreamTools::IndexBuffer> indexBuffer;
-		indexBuffer.reset(DreamTools::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		DreamTools::Ref<DreamTools::IndexBuffer> indexBuffer = DreamTools::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVertexArray = DreamTools::VertexArray::Create();
@@ -79,8 +77,7 @@ public:
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		std::shared_ptr<DreamTools::VertexBuffer> squareVertexBuffer;
-		squareVertexBuffer.reset(DreamTools::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		std::shared_ptr<DreamTools::VertexBuffer> squareVertexBuffer = DreamTools::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 
 		/*BufferLayout squareVertexBufferLayout =
 		{
@@ -95,8 +92,7 @@ public:
 		m_SquareVertexArray->AddVertexBuffer(squareVertexBuffer);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		DreamTools::Ref<DreamTools::IndexBuffer> squareIndexBuffer;
-		squareIndexBuffer.reset(DreamTools::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		DreamTools::Ref<DreamTools::IndexBuffer> squareIndexBuffer = DreamTools::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVertexArray->SetIndexBuffer(squareIndexBuffer);
 
 		//Shader Source code (Vertex)
