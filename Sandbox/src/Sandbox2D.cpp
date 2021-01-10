@@ -33,6 +33,8 @@ namespace DreamTools
 
 		m_CameraController.OnUpdate(ts);
 
+		DreamTools::Renderer2D::ResetStats();
+
 		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		DreamTools::RenderCommand::Clear();
 
@@ -40,14 +42,28 @@ namespace DreamTools
 		rotation += ts * 20.0f;
 
 		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
-		DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 10.0f, 10.0f },  m_CheckerBoardTexture, 1.0f);
-		DreamTools::Renderer2D::DrawRotatedQuad({ -1.0f, 0.0f, 0.1f },{ 1.0f, 1.0f }, rotation, m_CheckerBoardTexture, 20.0f);
+		DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.2f }, { 20.0f, 20.0f },  m_CheckerBoardTexture, 1.0f);
+		DreamTools::Renderer2D::DrawRotatedQuad({ 0.0f, 0.0f, 0.1f },{ 1.0f, 1.0f }, rotation, m_CheckerBoardTexture, 3.0f);
 
 		DreamTools::Renderer2D::DrawRotatedQuad({ -0.5f, -2.5f, 0.0f }, { 1.0f, 1.0f }, rotation, { 0.2f, 0.8f, 0.6f, 1.0f });
 
 		DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
 		DreamTools::Renderer2D::DrawQuad({ 0.0f, -1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.2f, 0.3f, 0.8f, 1.0f });
 		
+		DreamTools::Renderer2D::EndScene();
+
+		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
+		for (float y = -5.0f; y < 5.0f; y += 0.5f)
+		{
+			for (float x = -5.0f; x < 5.0f; x += 0.5f)
+			{
+				/*float r = glm::clamp(x, 0.0f, 1.0f);
+				float g = glm::clamp(y, 0.0f, 1.0f);*/
+
+				glm::vec4 color = { (x + 5.0f) / 10, 0.4f, (y + 5.0f) / 10, 0.5f };
+				DreamTools::Renderer2D::DrawQuad({ x, y, -0.1f }, { 0.45f, 0.45f }, color);
+			}
+		}
 		DreamTools::Renderer2D::EndScene();
 	}
 	void Sandbox2D::OnImGuiRender()
@@ -58,6 +74,15 @@ namespace DreamTools
 		ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
 		ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
 		ImGui::Text("Version: %s", glGetString(GL_VERSION));
+		ImGui::End();
+
+		auto stats = DreamTools::Renderer2D::GetStats();
+		ImGui::Begin("Settings:");
+		ImGui::Text("Renderer2DStats:", glGetString(GL_VENDOR));
+		ImGui::Text("DrawCalls: %d", stats.DrawCalls);
+		ImGui::Text("QuadCount: %d", stats.QuadCount);
+		ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
+		ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 		ImGui::End();
 	}
 
