@@ -202,7 +202,7 @@ namespace DreamTools
 	}
 }
 
-#define DT_PROFILE 1
+#define DT_PROFILE 0
 #if DT_PROFILE
 // Resolve which function signature macro will be used. Note that this only
 // is resolved when the (pre)compiler starts, so the syntax highlighting

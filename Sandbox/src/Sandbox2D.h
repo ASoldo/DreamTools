@@ -22,6 +22,7 @@ namespace DreamTools
 		DreamTools::Ref<DreamTools::Shader> m_FlatColorShader;
 
 		DreamTools::Ref<DreamTools::Texture2D> m_CheckerBoardTexture;
+		DreamTools::Ref<DreamTools::Texture2D> m_Logo;
 
 		struct ProfileResult
 		{
