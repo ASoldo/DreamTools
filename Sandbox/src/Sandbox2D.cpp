@@ -53,13 +53,13 @@ namespace DreamTools
 		static float rotation = 0.0f;
 		rotation += ts * 20.0f;
 
-		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());		
+		/*DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());		
 			DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.2f }, { 20.0f, 20.0f }, m_CheckerBoardTexture, 1.0f);
 			DreamTools::Renderer2D::DrawRotatedQuad({ 0.0f, 0.0f, 0.1f },{ 1.0f, 1.0f }, glm::radians(rotation), m_CheckerBoardTexture, 3.0f);
 			DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.1f }, { 1.0f, 1.0f }, { 0.8f, 0.2f, 0.3f, 1.0f });
 			DreamTools::Renderer2D::DrawRotatedQuad({ 0.0f, 0.0f, 0.4f }, { 1.0f, 1.0f }, glm::radians(rotation) + 10.0f, m_Logo, 1.0f, {0.0f, 1.0f, 0.0f, 1.0f});
 			DreamTools::Renderer2D::DrawRotatedQuad({ -0.5f, -2.5f, 0.0f }, { 1.0f, 1.0f }, glm::radians(rotation), { 0.2f, 0.8f, 0.6f, 1.0f });
-		DreamTools::Renderer2D::EndScene();
+		DreamTools::Renderer2D::EndScene();*/
 
 		//DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
 		//for (float y = -5.0f; y < 5.0f; y += 0.5f)
@@ -82,15 +82,15 @@ namespace DreamTools
 			auto pos = m_CameraController.GetCamera().GetPosition();
 			x = (x / width) * bounds.GetWidth() - bounds.GetWidth() * 0.5f;
 			y = bounds.GetHeight() * 0.5f - (y / height) * bounds.GetHeight();
-			//m_Particle.Position = { x + pos.x, y + pos.y };
-			m_Particle.Position = { 0, 0 };
+			m_Particle.Position = { x + pos.x, y + pos.y };
+			//m_Particle.Position = { 0, 0 };
 			for (int i = 0; i < 5; i++)
 				m_PartycleSystem.Emit(m_Particle);
 		}
 
-		/*DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
+		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
 			DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.4f }, { 1.0f, 1.0f }, m_SpriteSheet);
-		DreamTools::Renderer2D::EndScene();*/
+		DreamTools::Renderer2D::EndScene();
 
 		m_PartycleSystem.OnUpdate(ts);
 		m_PartycleSystem.OnRender(m_CameraController.GetCamera());
