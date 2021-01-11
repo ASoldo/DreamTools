@@ -82,7 +82,7 @@ namespace DreamTools
 			auto pos = m_CameraController.GetCamera().GetPosition();
 			x = (x / width) * bounds.GetWidth() - bounds.GetWidth() * 0.5f;
 			y = bounds.GetHeight() * 0.5f - (y / height) * bounds.GetHeight();
-			m_Particle.Position = { x + pos.x, y + pos.y };
+			m_Particle.Position = { x + pos.x , y + pos.y  };
 			//m_Particle.Position = { 0, 0 };
 			for (int i = 0; i < 5; i++)
 				m_PartycleSystem.Emit(m_Particle);
