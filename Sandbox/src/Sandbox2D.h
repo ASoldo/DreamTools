@@ -1,6 +1,8 @@
 #pragma once
 #include "DreamTools.h"
 
+#include "ParticleSystem.h"
+
 namespace DreamTools
 {
 	class Sandbox2D : public DreamTools::Layer
@@ -23,6 +25,7 @@ namespace DreamTools
 
 		DreamTools::Ref<DreamTools::Texture2D> m_CheckerBoardTexture;
 		DreamTools::Ref<DreamTools::Texture2D> m_Logo;
+		DreamTools::Ref<DreamTools::Texture2D> m_SpriteSheet;
 
 		struct ProfileResult
 		{
@@ -33,6 +36,9 @@ namespace DreamTools
 		std::vector<ProfileResult> m_ProfileResults;
 		
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.4f, 1.0f };
+
+		ParticleSystem m_PartycleSystem;
+		ParticleProps m_Particle;
 
 	};
 }
