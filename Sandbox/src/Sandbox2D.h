@@ -41,5 +41,9 @@ namespace DreamTools
 		ParticleSystem m_PartycleSystem;
 		ParticleProps m_Particle;
 
+		uint32_t m_MapWidth;
+		uint32_t m_MapHeight;
+		std::unordered_map<char, DreamTools::Ref<DreamTools::SubTexture2D>> s_TextureMap;
+
 	};
 }
