@@ -30,6 +30,11 @@ namespace DreamTools
 		m_Logo = DreamTools::Texture2D::Create("assets/textures/DreamToolsLogo.png");
 		m_SpriteSheet = DreamTools::Texture2D::Create("assets/game/textures/RPGpack.png");
 
+		DreamTools::FramebufferSpecification fbSpec;
+		fbSpec.Width = 1280;
+		fbSpec.Height = 720;
+		m_FrameBuffer = DreamTools::Framebuffer::Create(fbSpec);
+
 		m_TextureStairs = DreamTools::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 0,11 }, { 128,128 });
 
 		m_MapWidth = s_MapWidth;
@@ -61,6 +66,8 @@ namespace DreamTools
 		m_CameraController.OnUpdate(ts);
 
 		DreamTools::Renderer2D::ResetStats();
+
+		m_FrameBuffer->Bind();
 
 		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		DreamTools::RenderCommand::Clear();
@@ -123,6 +130,7 @@ namespace DreamTools
 			}
 		}
 		DreamTools::Renderer2D::EndScene();
+		m_FrameBuffer->Unbind();
 
 		m_PartycleSystem.OnUpdate(ts);
 		m_PartycleSystem.OnRender(m_CameraController.GetCamera());
@@ -139,7 +147,10 @@ namespace DreamTools
 		// Note that you already dock windows into each others _without_ a DockSpace() by just moving windows
 		// from their title bar (or by holding SHIFT if io.ConfigDockingWithShift is set).
 		// DockSpace() is only useful to construct to a central location for your application.
-		static bool dockspaceOpen = true;
+		static bool dockingEnabled = true;
+		if (dockingEnabled)
+		{
+			static bool dockspaceOpen = true;
 			static bool opt_fullscreen = true;
 			static bool opt_padding = false;
 			static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
@@ -189,7 +200,7 @@ namespace DreamTools
 				ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
 				ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 			}
-			
+
 
 			if (ImGui::BeginMenuBar())
 			{
@@ -230,18 +241,21 @@ namespace DreamTools
 			ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 			ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
-			uint32_t textureID = m_CheckerBoardTexture->GetRendererID();
-			ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+			ImGui::Begin("Scene:");
+				uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
+				ImGui::Image((void*)textureID, ImVec2{ 1280.0f, 720.0f });
+			ImGui::End();
 
 			ImGui::End();
 			//CUSTOM UI END
 
 			ImGui::End();
-		
-		//-----------------------------------------------------------------------------
-		// [SECTION] Example App: Documents Handling / ShowExampleAppDocuments()
-		//-----------------------------------------------------------------------------
 
+			//-----------------------------------------------------------------------------
+			// [SECTION] Example App: Documents Handling / ShowExampleAppDocuments()
+			//-----------------------------------------------------------------------------
+
+		}
 	}
 
 	void Sandbox2D::OnEvent(DreamTools::Event& e)

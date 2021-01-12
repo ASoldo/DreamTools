@@ -21,6 +21,7 @@
 
 #include "DreamTools/Renderer/Buffer.h"
 #include "DreamTools/Renderer/Shader.h"
+#include "DreamTools/Renderer/Framebuffer.h"
 #include "DreamTools/Renderer/Texture.h"
 #include "DreamTools/Renderer/SubTexture2D.h"
 #include "DreamTools/Renderer/VertexArray.h"

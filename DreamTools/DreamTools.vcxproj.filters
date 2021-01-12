@@ -1410,6 +1410,8 @@
     <ClInclude Include="src\DreamTools\Renderer\Renderer2D.h" />
     <ClInclude Include="src\DreamTools\Debug\Instrumentator.h" />
     <ClInclude Include="src\DreamTools\Renderer\SubTexture2D.h" />
+    <ClInclude Include="src\DreamTools\Renderer\Framebuffer.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Core\Application.cpp">
@@ -1489,5 +1491,7 @@
     </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\Renderer2D.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\SubTexture2D.cpp" />
+    <ClCompile Include="src\DreamTools\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
   </ItemGroup>
 </Project>
