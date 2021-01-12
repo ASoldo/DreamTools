@@ -2,7 +2,6 @@ workspace "DreamTools"
 
 	startproject "Sandbox"
 	architecture "x64"
-	
 
 	configurations
 	{
@@ -135,6 +134,58 @@ project "DreamTools"
 		
 		--staticruntime "on"
 		--systemversion "latest"
+
+	defines
+	{
+		"DT_PLATFORM_WINDOWS"
+	}
+
+	filter "configurations:Debug"
+		defines "DT_DEBUG"
+		runtime "Debug"
+		symbols "on"
+	
+
+	filter "configurations:Release"
+		defines "DT_RELEASE"
+		runtime "Release"
+		optimize "on"
+	
+
+	filter "configurations:Dist"
+		defines "DT_DIST"
+		runtime "Release"
+		optimize "on"
+
+
+	project "Dreamer"
+		location "Dreamer"
+		kind "ConsoleApp"
+		language "C++"
+		cppdialect "C++17"
+		staticruntime "on"
+
+		targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+		objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+ 
+	includedirs
+	{
+		"DreamTools/vendor/spdlog/include",
+		"DreamTools/src",
+		"DreamTools/vendor",
+		"%{IncludeDir.glm}"
+	}
+
+	links
+	{
+		"DreamTools"
+	}
 
 	defines
 	{

@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGui", "DreamTools\vendor\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DreamTools", "DreamTools\DreamTools.vcxproj", "{DFDB218D-CB93-63DA-349B-3C362072FECA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dreamer", "Dreamer\Dreamer.vcxproj", "{25917E87-9170-FD22-9A88-88F906E76384}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -50,6 +52,12 @@ Global
 		{DFDB218D-CB93-63DA-349B-3C362072FECA}.Dist|x64.Build.0 = Dist|x64
 		{DFDB218D-CB93-63DA-349B-3C362072FECA}.Release|x64.ActiveCfg = Release|x64
 		{DFDB218D-CB93-63DA-349B-3C362072FECA}.Release|x64.Build.0 = Release|x64
+		{25917E87-9170-FD22-9A88-88F906E76384}.Debug|x64.ActiveCfg = Debug|x64
+		{25917E87-9170-FD22-9A88-88F906E76384}.Debug|x64.Build.0 = Debug|x64
+		{25917E87-9170-FD22-9A88-88F906E76384}.Dist|x64.ActiveCfg = Dist|x64
+		{25917E87-9170-FD22-9A88-88F906E76384}.Dist|x64.Build.0 = Dist|x64
+		{25917E87-9170-FD22-9A88-88F906E76384}.Release|x64.ActiveCfg = Release|x64
+		{25917E87-9170-FD22-9A88-88F906E76384}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

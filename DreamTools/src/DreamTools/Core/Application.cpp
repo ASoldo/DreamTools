@@ -16,13 +16,13 @@ namespace DreamTools
 
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application()
+	Application::Application(const std::string& name)
 	{
 		DT_PROFILE_FUNCTION();
 		DT_CORE_ASSERT(!s_Instance, "Application is already running!");
 
 		s_Instance = this;
-		m_Window = Scope<Window>(Window::Create());
+		m_Window = Scope<Window>(Window::Create(WindowProps(name)));
 		
 		//Resize Console App
 		HWND console = GetConsoleWindow();

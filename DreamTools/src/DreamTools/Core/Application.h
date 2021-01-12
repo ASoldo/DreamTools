@@ -13,7 +13,7 @@ namespace DreamTools
 	class Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Dream Tools");
 		virtual ~Application();
 		void Run();
 		void OnEvent(Event& e);

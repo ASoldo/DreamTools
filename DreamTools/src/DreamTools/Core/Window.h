@@ -9,10 +9,10 @@ namespace DreamTools
 	struct WindowProps
 	{
 		std::string Title;
-		unsigned int Width;
-		unsigned int Height;
+		uint32_t Width;
+		uint32_t Height;
 
-		WindowProps(const std::string& title = "Dream Tools Engine", const unsigned width = 1280, const unsigned height = 720) : Title(title), Width(width), Height(height)
+		WindowProps(const std::string& title = "Dream Tools", const uint32_t width = 1280, const uint32_t height = 720) : Title(title), Width(width), Height(height)
 		{
 			
 		}
@@ -28,8 +28,8 @@ namespace DreamTools
 
 		virtual void OnUpdate() = 0;
 
-		virtual unsigned int GetWidth() const = 0;
-		virtual unsigned int GetHeight() const = 0;
+		virtual uint32_t GetWidth() const = 0;
+		virtual uint32_t GetHeight() const = 0;
 		 
 		//Window attributes
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;

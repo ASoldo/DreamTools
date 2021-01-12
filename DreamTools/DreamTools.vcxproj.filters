@@ -10,6 +10,9 @@
     <Filter Include="src\DreamTools\Core">
       <UniqueIdentifier>{AE6A92E9-1ACC-6FF7-A339-B6A90F9AA6B6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\DreamTools\Debug">
+      <UniqueIdentifier>{8C1BEC1B-78AA-75E5-21C9-89E00D37868B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\DreamTools\Events">
       <UniqueIdentifier>{BADFF99C-264C-B597-EF3F-4DF55B6BD7FF}</UniqueIdentifier>
     </Filter>
@@ -93,6 +96,9 @@
     <ClInclude Include="src\DreamTools\Core\Window.h">
       <Filter>src\DreamTools\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Debug\Instrumentator.h">
+      <Filter>src\DreamTools\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\DreamTools\Events\ApplicationEvent.h">
       <Filter>src\DreamTools\Events</Filter>
     </ClInclude>
@@ -111,6 +117,9 @@
     <ClInclude Include="src\DreamTools\Renderer\Buffer.h">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Renderer\Framebuffer.h">
+      <Filter>src\DreamTools\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\DreamTools\Renderer\GraphicsContext.h">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClInclude>
@@ -126,10 +135,16 @@
     <ClInclude Include="src\DreamTools\Renderer\Renderer.h">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Renderer\Renderer2D.h">
+      <Filter>src\DreamTools\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\DreamTools\Renderer\RendererAPI.h">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\DreamTools\Renderer\Shader.h">
+      <Filter>src\DreamTools\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DreamTools\Renderer\SubTexture2D.h">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\DreamTools\Renderer\Texture.h">
@@ -142,6 +157,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
@@ -1407,11 +1425,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\DreamTools\Renderer\Renderer2D.h" />
-    <ClInclude Include="src\DreamTools\Debug\Instrumentator.h" />
-    <ClInclude Include="src\DreamTools\Renderer\SubTexture2D.h" />
-    <ClInclude Include="src\DreamTools\Renderer\Framebuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Core\Application.cpp">
@@ -1435,6 +1448,9 @@
     <ClCompile Include="src\DreamTools\Renderer\Buffer.cpp">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\DreamTools\Renderer\Framebuffer.cpp">
+      <Filter>src\DreamTools\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\OrthographicCamera.cpp">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClCompile>
@@ -1447,10 +1463,16 @@
     <ClCompile Include="src\DreamTools\Renderer\Renderer.cpp">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\DreamTools\Renderer\Renderer2D.cpp">
+      <Filter>src\DreamTools\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\RendererAPI.cpp">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\Shader.cpp">
+      <Filter>src\DreamTools\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DreamTools\Renderer\SubTexture2D.cpp">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\Texture.cpp">
@@ -1463,6 +1485,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -1489,9 +1514,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\DreamTools\Renderer\Renderer2D.cpp" />
-    <ClCompile Include="src\DreamTools\Renderer\SubTexture2D.cpp" />
-    <ClCompile Include="src\DreamTools\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
   </ItemGroup>
 </Project>
