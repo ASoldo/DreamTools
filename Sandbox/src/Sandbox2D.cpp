@@ -24,6 +24,7 @@ namespace DreamTools
 		m_Logo = DreamTools::Texture2D::Create("assets/textures/DreamToolsLogo.png");
 		m_SpriteSheet = DreamTools::Texture2D::Create("assets/game/textures/RPGpack.png");
 
+		m_TextureStairs = DreamTools::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2,1 }, { 128,128 }, { 1,2 });
 
 		// Init here
 		m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
@@ -89,7 +90,7 @@ namespace DreamTools
 		}
 
 		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
-			DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.4f }, { 1.0f, 1.0f }, m_SpriteSheet);
+			DreamTools::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.4f }, { 1.0f, 2.0f }, m_TextureStairs), 1.0f;
 		DreamTools::Renderer2D::EndScene();
 
 		m_PartycleSystem.OnUpdate(ts);

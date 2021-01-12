@@ -26,6 +26,7 @@ namespace DreamTools
 		DreamTools::Ref<DreamTools::Texture2D> m_CheckerBoardTexture;
 		DreamTools::Ref<DreamTools::Texture2D> m_Logo;
 		DreamTools::Ref<DreamTools::Texture2D> m_SpriteSheet;
+		DreamTools::Ref<DreamTools::SubTexture2D> m_TextureStairs;
 
 		struct ProfileResult
 		{

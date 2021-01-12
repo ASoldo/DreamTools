@@ -1409,6 +1409,7 @@
     </ClInclude>
     <ClInclude Include="src\DreamTools\Renderer\Renderer2D.h" />
     <ClInclude Include="src\DreamTools\Debug\Instrumentator.h" />
+    <ClInclude Include="src\DreamTools\Renderer\SubTexture2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Core\Application.cpp">
@@ -1487,5 +1488,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\Renderer2D.cpp" />
+    <ClCompile Include="src\DreamTools\Renderer\SubTexture2D.cpp" />
   </ItemGroup>
 </Project>
