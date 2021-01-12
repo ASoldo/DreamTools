@@ -92,6 +92,11 @@ namespace DreamTools
 		layer->OnAttach();
 	}
 
+	void Application::Close()
+	{
+		m_Running = false;
+	}
+
 	Application::~Application()
 	{
 		DT_PROFILE_FUNCTION();
