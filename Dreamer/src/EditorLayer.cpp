@@ -104,9 +104,7 @@ namespace DreamTools
 		// Note that you already dock windows into each others _without_ a DockSpace() by just moving windows
 		// from their title bar (or by holding SHIFT if io.ConfigDockingWithShift is set).
 		// DockSpace() is only useful to construct to a central location for your application.
-		static bool dockingEnabled = true;
-		if (dockingEnabled)
-		{
+		
 			static bool dockspaceOpen = true;
 			static bool opt_fullscreen = true;
 			static bool opt_padding = false;
@@ -198,10 +196,21 @@ namespace DreamTools
 			ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 			ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
-			ImGui::Begin("Scene:");
+
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 0.0f });
+			ImGui::Begin("Viewport:");
+				ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+				if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
+				{
+					m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+					m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+					m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);	
+				}
+				
 				uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
-				ImGui::Image((void*)textureID, ImVec2{ 1280.0f, 720.0f }, ImVec2{ 0,1 }, ImVec2{ 1,0 });
+				ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0.0f, 1.0f }, ImVec2{ 1.0f, 0.0f });
 			ImGui::End();
+			ImGui::PopStyleVar();
 
 			ImGui::End();
 			//CUSTOM UI END
@@ -212,7 +221,7 @@ namespace DreamTools
 			// [SECTION] Example App: Documents Handling / ShowExampleAppDocuments()
 			//-----------------------------------------------------------------------------
 
-		}
+		
 	}
 
 	void EditorLayer::OnEvent(DreamTools::Event& e)
