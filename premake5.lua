@@ -18,6 +18,7 @@ workspace "DreamTools"
 	IncludeDir["ImGui"] = "DreamTools/vendor/imgui"
 	IncludeDir["glm"] = "DreamTools/vendor/glm"
 	IncludeDir["stb_image"] = "DreamTools/vendor/stb_image"
+	IncludeDir["entt"] = "DreamTools/vendor/entt/include"
 
 	group "Dependencies"
 		include "DreamTools/vendor/GLFW"
@@ -61,7 +62,8 @@ project "DreamTools"
 		"%{IncludeDir.GLAD}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
@@ -122,18 +124,14 @@ project "DreamTools"
 		"DreamTools/vendor/spdlog/include",
 		"DreamTools/src",
 		"DreamTools/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
 	{
 		"DreamTools"
 	}
-
-	--filter "system:windows"
-		
-		--staticruntime "on"
-		--systemversion "latest"
 
 	defines
 	{
@@ -179,7 +177,8 @@ project "DreamTools"
 		"DreamTools/vendor/spdlog/include",
 		"DreamTools/src",
 		"DreamTools/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links

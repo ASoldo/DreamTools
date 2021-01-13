@@ -1422,6 +1422,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\DreamTools\Scene\Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Core\Application.cpp">
@@ -1446,6 +1447,9 @@
       <Filter>src\DreamTools\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\Framebuffer.cpp">
+      <Filter>src\DreamTools\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DreamTools\Renderer\GraphicsContext.cpp">
       <Filter>src\DreamTools\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\DreamTools\Renderer\OrthographicCamera.cpp">
@@ -1511,6 +1515,6 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\DreamTools\Renderer\GraphicsContext.cpp" />
+    <ClCompile Include="src\DreamTools\Scene\Scene.cpp" />
   </ItemGroup>
 </Project>
