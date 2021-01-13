@@ -2,11 +2,8 @@
 
 namespace DreamTools
 {
-	using KeyCode = uint16_t;
-	namespace Key
+	typedef enum class KeyCode : uint16_t
 	{
-		enum : KeyCode
-		{
 			// From glfw3.h
 			Space = 32,
 			Apostrophe = 39, /* ' */
@@ -138,6 +135,12 @@ namespace DreamTools
 			RightAlt = 346,
 			RightSuper = 347,
 			Menu = 348
-		};
+		
+	} Key;
+
+	inline std::ostream& operator<<(std::ostream& os, KeyCode keyCode)
+	{
+		os << static_cast<int32_t>(keyCode);
+		return os;
 	}
 }
