@@ -55,7 +55,11 @@ namespace DreamTools
 	{
 		DT_PROFILE_FUNCTION();
 
-		m_CameraController.OnUpdate(ts);
+		if (m_ViewPortFocused)
+		{
+			m_CameraController.OnUpdate(ts);
+		}
+		
 
 		DreamTools::Renderer2D::ResetStats();
 
@@ -66,8 +70,6 @@ namespace DreamTools
 
 		static float rotation = 0.0f;
 		rotation += ts * 20.0f;
-
-		
 
 		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
@@ -159,7 +161,7 @@ namespace DreamTools
 
 			if (ImGui::BeginMenuBar())
 			{
-				if (ImGui::BeginMenu("Options"))
+				if (ImGui::BeginMenu("DreamTools"))
 				{
 					// Disabling fullscreen would allow the window to be moved to the front of other windows,
 					// which we can't undo at the moment without finer window depth/z control.
@@ -167,11 +169,11 @@ namespace DreamTools
 					ImGui::MenuItem("Padding", NULL, &opt_padding);
 					ImGui::Separator();
 
-					if (ImGui::MenuItem("Flag: NoSplit", "", (dockspace_flags & ImGuiDockNodeFlags_NoSplit) != 0)) { dockspace_flags ^= ImGuiDockNodeFlags_NoSplit; }
+					/*if (ImGui::MenuItem("Flag: NoSplit", "", (dockspace_flags & ImGuiDockNodeFlags_NoSplit) != 0)) { dockspace_flags ^= ImGuiDockNodeFlags_NoSplit; }
 					if (ImGui::MenuItem("Flag: NoResize", "", (dockspace_flags & ImGuiDockNodeFlags_NoResize) != 0)) { dockspace_flags ^= ImGuiDockNodeFlags_NoResize; }
 					if (ImGui::MenuItem("Flag: NoDockingInCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_NoDockingInCentralNode) != 0)) { dockspace_flags ^= ImGuiDockNodeFlags_NoDockingInCentralNode; }
 					if (ImGui::MenuItem("Flag: AutoHideTabBar", "", (dockspace_flags & ImGuiDockNodeFlags_AutoHideTabBar) != 0)) { dockspace_flags ^= ImGuiDockNodeFlags_AutoHideTabBar; }
-					if (ImGui::MenuItem("Flag: PassthruCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode) != 0, opt_fullscreen)) { dockspace_flags ^= ImGuiDockNodeFlags_PassthruCentralNode; }
+					if (ImGui::MenuItem("Flag: PassthruCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode) != 0, opt_fullscreen)) { dockspace_flags ^= ImGuiDockNodeFlags_PassthruCentralNode; }*/
 					if (ImGui::MenuItem("Exit")) DreamTools::Application::Get().Close();
 					ImGui::Separator();
 
@@ -195,33 +197,34 @@ namespace DreamTools
 			ImGui::Text("QuadCount: %d", stats.QuadCount);
 			ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 			ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-
+			ImGui::End();
+			//CUSTOM UI END
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 0.0f });
 			ImGui::Begin("Viewport:");
-				ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
-				if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
-				{
-					m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
-					m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
-					m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);	
-				}
+			m_ViewPortFocused = ImGui::IsWindowFocused();
+			m_ViewPortHovered = ImGui::IsWindowHovered();
+			Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewPortFocused || !m_ViewPortHovered);
+			//DT_CORE_WARN("Focused: {0}", ImGui::IsWindowFocused());
+			//DT_CORE_WARN("Hovered: {0}", ImGui::IsWindowHovered());
+			ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+			if (m_ViewportSize != *((glm::vec2*)&viewportPanelSize))
+			{
+				m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
+				m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+				m_CameraController.OnResize(viewportPanelSize.x, viewportPanelSize.y);	
+			}
 				
-				uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
-				ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0.0f, 1.0f }, ImVec2{ 1.0f, 0.0f });
+			uint32_t textureID = m_FrameBuffer->GetColorAttachmentRendererID();
+			ImGui::Image((void*)textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0.0f, 1.0f }, ImVec2{ 1.0f, 0.0f });
 			ImGui::End();
 			ImGui::PopStyleVar();
-
-			ImGui::End();
-			//CUSTOM UI END
 
 			ImGui::End();
 
 			//-----------------------------------------------------------------------------
 			// [SECTION] Example App: Documents Handling / ShowExampleAppDocuments()
 			//-----------------------------------------------------------------------------
-
-		
 	}
 
 	void EditorLayer::OnEvent(DreamTools::Event& e)

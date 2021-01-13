@@ -1,20 +1,15 @@
 #include "dtpch.h"
 #include "ImGuiLayer.h"
-
 #include "imgui.h"
 #define IMGUI_IMPL_API
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
-
-
 #include "DreamTools/Core/Application.h"
 #include "../Core/Core.h"
-
 //Temp
 #include <../vendor/GLFW/include/GLFW/glfw3.h>
 #include <glad/glad.h>
 #include "../Events/ApplicationEvent.h"
-
 
 namespace DreamTools
 {
@@ -79,16 +74,15 @@ namespace DreamTools
 		ImGui::DestroyContext();
 	}
 
-	/*void ImGuiLayer::OnImGuiRender()
+	void ImGuiLayer::OnEvent(Event& event)
 	{
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-	}*/
-
-	/*void ImGuiLayer::OnUpdate()
-	{
-		
-	}*/
+		if (m_BlockEvents)
+		{
+			ImGuiIO& io = ImGui::GetIO();
+			event.Handled |= event.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
+			event.Handled |= event.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
+		}
+	}
 
 	void ImGuiLayer::Begin()
 	{

@@ -38,7 +38,8 @@ namespace DreamTools
 		
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.4f, 1.0f };
 
-		
+		bool m_ViewPortFocused = false;
+		bool m_ViewPortHovered = false;
 		glm::vec2 m_ViewportSize = { 0.0f, 0.0f };
 		uint32_t m_MapWidth;
 		uint32_t m_MapHeight;
