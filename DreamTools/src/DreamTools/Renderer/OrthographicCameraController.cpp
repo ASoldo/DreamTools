@@ -81,7 +81,7 @@ namespace DreamTools
 		DT_PROFILE_FUNCTION();
 
 		m_ZoomLevel -= e.GetOffsetY() * 0.1f;
-		m_ZoomLevel = std::max(m_ZoomLevel, 0.05f);
+		m_ZoomLevel = std::max(m_ZoomLevel, 0.5f);
 		CalculateView();
 		return false;
 	}
