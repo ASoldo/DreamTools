@@ -606,6 +606,7 @@
     <ClCompile Include="src\DreamTools\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Buffer.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\DreamTools\Renderer\GraphicsContext.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\DreamTools\Renderer\RenderCommand.cpp" />
