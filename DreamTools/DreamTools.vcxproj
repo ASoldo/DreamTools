@@ -172,6 +172,7 @@
     <ClInclude Include="src\DreamTools\Renderer\SubTexture2D.h" />
     <ClInclude Include="src\DreamTools\Renderer\Texture.h" />
     <ClInclude Include="src\DreamTools\Renderer\VertexArray.h" />
+    <ClInclude Include="src\DreamTools\Scene\Components.h" />
     <ClInclude Include="src\DreamTools\Scene\Scene.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />

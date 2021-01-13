@@ -26,32 +26,39 @@ namespace DreamTools
 	{
 		DT_PROFILE_FUNCTION();
 
-		m_CheckerBoardTexture = DreamTools::Texture2D::Create("assets/textures/DreamToolsCheckerboard.png");
-		m_Logo = DreamTools::Texture2D::Create("assets/textures/DreamToolsLogo.png");
-		m_SpriteSheet = DreamTools::Texture2D::Create("assets/game/textures/RPGpack.png");
+		m_CheckerBoardTexture = Texture2D::Create("assets/textures/DreamToolsCheckerboard.png");
+		m_Logo = Texture2D::Create("assets/textures/DreamToolsLogo.png");
+		m_SpriteSheet = Texture2D::Create("assets/game/textures/RPGpack.png");
 
-		DreamTools::FramebufferSpecification fbSpec;
+		FramebufferSpecification fbSpec;
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
-		m_FrameBuffer = DreamTools::Framebuffer::Create(fbSpec);
+		m_FrameBuffer = Framebuffer::Create(fbSpec);
 
-		m_TextureStairs = DreamTools::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 0,11 }, { 128,128 });
+		m_TextureStairs = SubTexture2D::CreateFromCoords(m_SpriteSheet, { 0,11 }, { 128,128 });
 
 		m_MapWidth = s_MapWidth;
 		m_MapHeight = strlen(s_MapTiles) / s_MapWidth;
 
-		s_TextureMap['D'] = DreamTools::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 6, 11 }, { 128,128 }, { 1,1 });
-		s_TextureMap['W'] = DreamTools::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 11, 11 }, { 128,128 }, { 1,1 });
+		s_TextureMap['D'] = SubTexture2D::CreateFromCoords(m_SpriteSheet, { 6, 11 }, { 128,128 }, { 1,1 });
+		s_TextureMap['W'] = SubTexture2D::CreateFromCoords(m_SpriteSheet, { 11, 11 }, { 128,128 }, { 1,1 });
 
 
 		m_CameraController.SetZoomLevel(5.0f);
+
+		m_ActiveScene = CreateRef<Scene>();
+		auto square = m_ActiveScene->CreateEntity();
+		m_ActiveScene->Reg().emplace<TransformComponent>(square);
+		m_ActiveScene->Reg().emplace<SpriteRendererComponent>(square, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+
+		m_SquareEntity = square;
 	}
 	void EditorLayer::OnDetach()
 	{
 		DT_PROFILE_FUNCTION();
 
 	}
-	void EditorLayer::OnUpdate(DreamTools::Timestep ts)
+	void EditorLayer::OnUpdate(Timestep ts)
 	{
 		DT_PROFILE_FUNCTION();
 
@@ -59,38 +66,43 @@ namespace DreamTools
 		{
 			m_CameraController.OnUpdate(ts);
 		}
-		
 
-		DreamTools::Renderer2D::ResetStats();
+		Renderer2D::ResetStats();
 
 		m_FrameBuffer->Bind();
 
-		DreamTools::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
-		DreamTools::RenderCommand::Clear();
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		RenderCommand::Clear();
 
-		static float rotation = 0.0f;
-		rotation += ts * 20.0f;
 
-		DreamTools::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-		for (uint32_t y = 0; y < m_MapHeight; y++)
-		{
-			for (uint32_t x = 0; x < m_MapWidth; x++)
-			{
-				char tileType = s_MapTiles[x + y * m_MapWidth];
-				DreamTools::Ref<DreamTools::SubTexture2D> texture;
-				if (s_TextureMap.find(tileType) != s_TextureMap.end())
-				{
-					texture = s_TextureMap[tileType];
-				}
-				else
-				{
-					texture = m_TextureStairs;
-				}
-				DreamTools::Renderer2D::DrawQuad({ x - m_MapWidth / 2.0f, m_MapHeight / 2.0f - y , 0.4f }, { 1.0f, 1.0f }, texture);
-			}
-		}
-		DreamTools::Renderer2D::EndScene();
+		//static float rotation = 0.0f;
+		//rotation += ts * 20.0f;
+
+		Renderer2D::BeginScene(m_CameraController.GetCamera());
+
+		//Update scene
+		m_ActiveScene->OnUpdate(ts);
+
+		//for (uint32_t y = 0; y < m_MapHeight; y++)
+		//{
+		//	for (uint32_t x = 0; x < m_MapWidth; x++)
+		//	{
+		//		char tileType = s_MapTiles[x + y * m_MapWidth];
+		//		Ref<SubTexture2D> texture;
+		//		if (s_TextureMap.find(tileType) != s_TextureMap.end())
+		//		{
+		//			texture = s_TextureMap[tileType];
+		//		}
+		//		else
+		//		{
+		//			texture = m_TextureStairs;
+		//		}
+		//		Renderer2D::DrawQuad({ x - m_MapWidth / 2.0f, m_MapHeight / 2.0f - y , 0.4f }, { 1.0f, 1.0f }, texture);
+		//	}
+		//}
+
+		Renderer2D::EndScene();
 		m_FrameBuffer->Unbind();
 
 	}
@@ -174,7 +186,7 @@ namespace DreamTools
 					if (ImGui::MenuItem("Flag: NoDockingInCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_NoDockingInCentralNode) != 0)) { dockspace_flags ^= ImGuiDockNodeFlags_NoDockingInCentralNode; }
 					if (ImGui::MenuItem("Flag: AutoHideTabBar", "", (dockspace_flags & ImGuiDockNodeFlags_AutoHideTabBar) != 0)) { dockspace_flags ^= ImGuiDockNodeFlags_AutoHideTabBar; }
 					if (ImGui::MenuItem("Flag: PassthruCentralNode", "", (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode) != 0, opt_fullscreen)) { dockspace_flags ^= ImGuiDockNodeFlags_PassthruCentralNode; }*/
-					if (ImGui::MenuItem("Exit")) DreamTools::Application::Get().Close();
+					if (ImGui::MenuItem("Exit")) Application::Get().Close();
 					ImGui::Separator();
 
 					/*if (ImGui::MenuItem("Close", NULL, false))
@@ -191,7 +203,7 @@ namespace DreamTools
 			ImGui::Text("Version: %s", glGetString(GL_VERSION));
 			ImGui::End();
 
-			auto stats = DreamTools::Renderer2D::GetStats();
+			auto stats = Renderer2D::GetStats();
 			ImGui::Begin("Renderer2D Stats:");
 			ImGui::Text("DrawCalls: %d", stats.DrawCalls);
 			ImGui::Text("QuadCount: %d", stats.QuadCount);
@@ -199,6 +211,11 @@ namespace DreamTools
 			ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 			ImGui::End();
 			//CUSTOM UI END
+
+			ImGui::Begin("Color:");
+			auto& squareColor = m_ActiveScene->Reg().get<SpriteRendererComponent>(m_SquareEntity).Color;
+			ImGui::ColorEdit4("Square Color: ", glm::value_ptr(squareColor));
+			ImGui::End();
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 0.0f });
 			ImGui::Begin("Viewport:");
@@ -227,7 +244,7 @@ namespace DreamTools
 			//-----------------------------------------------------------------------------
 	}
 
-	void EditorLayer::OnEvent(DreamTools::Event& e)
+	void EditorLayer::OnEvent(Event& e)
 	{
 		m_CameraController.OnEvent(e);
 	}

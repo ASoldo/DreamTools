@@ -14,6 +14,9 @@
 #include "DreamTools/ImGui/ImGuiLayer.h"
 #include "DreamTools/Renderer/OrthographicCameraController.h"
 
+#include "DreamTools/Scene/Scene.h"
+#include "DreamTools/Scene/Components.h"
+
 //Renderer ---------------------------
 #include "DreamTools/Renderer/Renderer.h"
 #include "DreamTools/Renderer/Renderer2D.h"

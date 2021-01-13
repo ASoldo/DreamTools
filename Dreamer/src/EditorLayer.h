@@ -28,6 +28,9 @@ namespace DreamTools
 		Ref<SubTexture2D> m_TextureStairs;
 		Ref<Framebuffer> m_FrameBuffer;
 
+		Ref<Scene> m_ActiveScene;
+		entt::entity m_SquareEntity;
+
 		struct ProfileResult
 		{
 			const char* Name;
