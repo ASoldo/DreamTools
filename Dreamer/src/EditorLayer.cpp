@@ -52,19 +52,30 @@ namespace DreamTools
 
 		m_SquareEntity = square;
 		m_CameraEntity = m_ActiveScene->CreateEntity("Main Camera Entity");
-		m_CameraEntity.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f)).Primary = true;
+		m_CameraEntity.AddComponent<CameraComponent>().Primary = true;
 
 		m_SecondsCameraEntity = m_ActiveScene->CreateEntity("Second Camera Entity");
-		auto& cc = m_SecondsCameraEntity.AddComponent<CameraComponent>(glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f)).Primary = false;
+		auto& cc = m_SecondsCameraEntity.AddComponent<CameraComponent>().Primary = false;
+	
 	}
 	void EditorLayer::OnDetach()
 	{
 		DT_PROFILE_FUNCTION();
 
 	}
+
 	void EditorLayer::OnUpdate(Timestep ts)
 	{
 		DT_PROFILE_FUNCTION();
+
+		if (FramebufferSpecification spec = m_FrameBuffer->GetSpecification();
+			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f )
+		{
+			m_FrameBuffer->Resize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
+
+			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+		}
 
 		if (m_ViewPortFocused)
 		{
@@ -110,6 +121,7 @@ namespace DreamTools
 		m_FrameBuffer->Unbind();
 
 	}
+
 	void EditorLayer::OnImGuiRender()
 	{
 		DT_PROFILE_FUNCTION();
@@ -225,13 +237,23 @@ namespace DreamTools
 				ImGui::ColorEdit4("Square Color: ", glm::value_ptr(squareColor));
 			}
 			ImGui::DragFloat3("Camera Transform:",
-				glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
+			glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
 			
 			if (ImGui::Checkbox("Camera A", &m_PrimaryCamera))
 			{
 				m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
 				m_SecondsCameraEntity.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
 			}
+
+			{
+				auto& camera = m_SecondsCameraEntity.GetComponent<CameraComponent>().Camera;
+				float orthoSize = camera.GetOrthographicSize();
+				if (ImGui::DragFloat3("2nd Camera Otrho Size: ", &orthoSize))
+				{
+					camera.SetOrthographicSize(orthoSize);
+				}
+			}
+			
 			
 			ImGui::End();
 
