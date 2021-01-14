@@ -12,7 +12,8 @@
 
 namespace DreamTools
 {
-	#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+	//#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+	#define BIND_EVENT_FN(x) [this](auto&&... args) -> decltype(auto) { return this->Application::x(std::forward<decltype(args)>(args)...); }
 
 	Application* Application::s_Instance = nullptr;
 
