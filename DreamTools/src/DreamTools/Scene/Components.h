@@ -1,5 +1,6 @@
 #pragma once
 #include "glm/glm.hpp"
+#include "DreamTools/Renderer/Camera.h"
 
 namespace DreamTools
 {
@@ -37,5 +38,14 @@ namespace DreamTools
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
 		SpriteRendererComponent(const glm::vec4& color) : Color(color) {}
 
+	};
+	struct CameraComponent
+	{
+		DreamTools::Camera Camera;
+		bool Primary = false;
+
+		CameraComponent() = default;
+		CameraComponent(const CameraComponent&) = default;
+		CameraComponent(const glm::mat4& projection) : Camera(projection) {}
 	};
 }

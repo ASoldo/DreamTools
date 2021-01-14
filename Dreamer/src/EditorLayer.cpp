@@ -47,10 +47,15 @@ namespace DreamTools
 		m_CameraController.SetZoomLevel(5.0f);
 
 		m_ActiveScene = CreateRef<Scene>();
-		auto square = m_ActiveScene->CreateEntity("SquareSoft");
+		auto square = m_ActiveScene->CreateEntity("Square Soft Entity");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
 
 		m_SquareEntity = square;
+		m_CameraEntity = m_ActiveScene->CreateEntity("Main Camera Entity");
+		m_CameraEntity.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f)).Primary = true;
+
+		m_SecondsCameraEntity = m_ActiveScene->CreateEntity("Second Camera Entity");
+		auto& cc = m_SecondsCameraEntity.AddComponent<CameraComponent>(glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f)).Primary = false;
 	}
 	void EditorLayer::OnDetach()
 	{
@@ -78,7 +83,7 @@ namespace DreamTools
 		//static float rotation = 0.0f;
 		//rotation += ts * 20.0f;
 
-		Renderer2D::BeginScene(m_CameraController.GetCamera());
+		//Renderer2D::BeginScene(m_CameraController.GetCamera());
 
 		//Update scene
 		m_ActiveScene->OnUpdate(ts);
@@ -218,6 +223,14 @@ namespace DreamTools
 				ImGui::Text("%s", tag.c_str());
 				auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
 				ImGui::ColorEdit4("Square Color: ", glm::value_ptr(squareColor));
+			}
+			ImGui::DragFloat3("Camera Transform:",
+				glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
+			
+			if (ImGui::Checkbox("Camera A", &m_PrimaryCamera))
+			{
+				m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
+				m_SecondsCameraEntity.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
 			}
 			
 			ImGui::End();

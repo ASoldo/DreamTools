@@ -1425,6 +1425,7 @@
     <ClInclude Include="src\DreamTools\Scene\Scene.h" />
     <ClInclude Include="src\DreamTools\Scene\Components.h" />
     <ClInclude Include="src\DreamTools\Scene\Entity.h" />
+    <ClInclude Include="src\DreamTools\Renderer\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DreamTools\Core\Application.cpp">
