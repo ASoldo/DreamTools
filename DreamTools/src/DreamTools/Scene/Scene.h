@@ -5,6 +5,8 @@
 
 namespace DreamTools
 {
+	class Entity;
+
 	class Scene
 	{
 	public:
@@ -12,12 +14,11 @@ namespace DreamTools
 		~Scene();
 		void OnUpdate(Timestep ts);
 
-		//Temp
-		entt::registry& Reg() { return m_Registry; }
+		Entity CreateEntity(const std::string& name = std::string());
 
-		entt::entity CreateEntity();
 	private:
 		entt::registry m_Registry;
 
+		friend class Entity;
 	};
 }

@@ -29,7 +29,7 @@ namespace DreamTools
 		Ref<Framebuffer> m_FrameBuffer;
 
 		Ref<Scene> m_ActiveScene;
-		entt::entity m_SquareEntity;
+		Entity m_SquareEntity;
 
 		struct ProfileResult
 		{

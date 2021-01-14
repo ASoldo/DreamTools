@@ -15,6 +15,7 @@
 #include "DreamTools/Renderer/OrthographicCameraController.h"
 
 #include "DreamTools/Scene/Scene.h"
+#include "DreamTools/Scene/Entity.h"
 #include "DreamTools/Scene/Components.h"
 
 //Renderer ---------------------------
