@@ -16,6 +16,7 @@
 
 #include "DreamTools/Scene/Scene.h"
 #include "DreamTools/Scene/Entity.h"
+#include "DreamTools/Scene/ScriptableEntity.h"
 #include "DreamTools/Scene/Components.h"
 
 //Renderer ---------------------------

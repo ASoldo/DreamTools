@@ -56,6 +56,38 @@ namespace DreamTools
 
 		m_SecondsCameraEntity = m_ActiveScene->CreateEntity("Second Camera Entity");
 		auto& cc = m_SecondsCameraEntity.AddComponent<CameraComponent>().Primary = false;
+
+		class CameraController : public ScriptableEntity
+		{
+		public:
+			void OnCreate()
+			{
+				std::cout << "CameraController::OnCreate()" << std::endl;
+			}
+
+			void OnDestroy()
+			{
+				std::cout << "CameraController::OnDestroy()" << std::endl;
+			}
+
+			void OnUpdate(Timestep ts)
+			{
+				//std::cout << "Timestep " << ts << std::endl;
+				auto& transform = GetComponent<TransformComponent>().Transform;
+				float speed = 5.0f;
+				if (Input::IsKeyPressed(KeyCode::A))
+					transform[3][0] -= speed * ts;
+				if (Input::IsKeyPressed(KeyCode::D))
+					transform[3][0] += speed * ts;
+				if (Input::IsKeyPressed(KeyCode::W))
+					transform[3][1] += speed * ts;
+				if (Input::IsKeyPressed(KeyCode::S))
+					transform[3][1] -= speed * ts;
+
+			}
+		};
+
+		m_SecondsCameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 	
 	}
 	void EditorLayer::OnDetach()
