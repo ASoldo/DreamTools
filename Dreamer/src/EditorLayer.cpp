@@ -89,6 +89,8 @@ namespace DreamTools
 
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		//m_SecondCameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	
 	}
 	void EditorLayer::OnDetach()
@@ -245,6 +247,9 @@ namespace DreamTools
 				ImGui::EndMenuBar();
 			}
 			//CUSTOM UI START
+
+			m_SceneHierarchyPanel.OnImGuiRender();
+
 
 			ImGui::Begin("OpenGL Info:");
 			ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));

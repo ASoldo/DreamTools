@@ -1,5 +1,6 @@
 #pragma once
 #include "DreamTools.h"
+#include "Panels/SceneHierarchyPanel.h"
 
 namespace DreamTools
 {
@@ -51,6 +52,9 @@ namespace DreamTools
 		uint32_t m_MapWidth;
 		uint32_t m_MapHeight;
 		std::unordered_map<char, DreamTools::Ref<DreamTools::SubTexture2D>> s_TextureMap;
+
+		//Panels
+		SceneHierarchyPanel m_SceneHierarchyPanel;
 
 	};
 }
