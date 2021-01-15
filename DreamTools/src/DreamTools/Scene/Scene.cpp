@@ -69,18 +69,18 @@ namespace DreamTools
 					{
 						if (!nsc.Instance)
 						{
-							nsc.InstantiateFunction();
+							nsc.Instance = nsc.InstantiateScript();
 							nsc.Instance->m_Entity = Entity { entity, this };
-							nsc.OnCreateFunction(nsc.Instance);
+							nsc.Instance->OnCreate();
 						}
-						nsc.OnUpdateFunction(nsc.Instance, ts);
+						nsc.Instance->OnUpdate(ts);
 					});
 			}
 			//Render 2D sprites
 			auto group = m_Registry.view<TransformComponent, CameraComponent>();
 			for (auto entity : group)
 			{
-				auto& [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
+				auto [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
 
 				if (camera.Primary)
 				{
@@ -96,7 +96,7 @@ namespace DreamTools
 			auto renderGroup = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 			for (auto entity : renderGroup)
 			{
-				auto& [transform, sprite] = renderGroup.get<TransformComponent, SpriteRendererComponent>(entity);
+				auto [transform, sprite] = renderGroup.get<TransformComponent, SpriteRendererComponent>(entity);
 				Renderer2D::DrawQuad(transform, sprite.Color);
 			}
 			Renderer2D::EndScene();

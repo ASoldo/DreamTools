@@ -54,8 +54,8 @@ namespace DreamTools
 		m_CameraEntity = m_ActiveScene->CreateEntity("Main Camera Entity");
 		m_CameraEntity.AddComponent<CameraComponent>().Primary = true;
 
-		m_SecondsCameraEntity = m_ActiveScene->CreateEntity("Second Camera Entity");
-		auto& cc = m_SecondsCameraEntity.AddComponent<CameraComponent>().Primary = false;
+		m_SecondCameraEntity = m_ActiveScene->CreateEntity("Second Camera Entity");
+		auto& cc = m_SecondCameraEntity.AddComponent<CameraComponent>().Primary = false;
 
 		class CameraController : public ScriptableEntity
 		{
@@ -87,7 +87,8 @@ namespace DreamTools
 			}
 		};
 
-		m_SecondsCameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+		//m_SecondCameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 	
 	}
 	void EditorLayer::OnDetach()
@@ -274,11 +275,11 @@ namespace DreamTools
 			if (ImGui::Checkbox("Camera A", &m_PrimaryCamera))
 			{
 				m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
-				m_SecondsCameraEntity.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
+				m_SecondCameraEntity.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
 			}
 
 			{
-				auto& camera = m_SecondsCameraEntity.GetComponent<CameraComponent>().Camera;
+				auto& camera = m_SecondCameraEntity.GetComponent<CameraComponent>().Camera;
 				float orthoSize = camera.GetOrthographicSize();
 				if (ImGui::DragFloat3("2nd Camera Otrho Size: ", &orthoSize))
 				{
