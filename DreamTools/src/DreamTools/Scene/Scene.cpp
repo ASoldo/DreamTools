@@ -62,34 +62,34 @@ namespace DreamTools
 	{
 		Camera* mainCamera = nullptr;
 		glm::mat4* cameraTransform = nullptr;
-		{
-			//Update Scripts
+		
+		//Update Scripts
+			
+		m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
 			{
-				m_Registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
-					{
-						if (!nsc.Instance)
-						{
-							nsc.Instance = nsc.InstantiateScript();
-							nsc.Instance->m_Entity = Entity { entity, this };
-							nsc.Instance->OnCreate();
-						}
-						nsc.Instance->OnUpdate(ts);
-					});
-			}
-			//Render 2D sprites
-			auto group = m_Registry.view<TransformComponent, CameraComponent>();
-			for (auto entity : group)
-			{
-				auto [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
-
-				if (camera.Primary)
+				if (!nsc.Instance)
 				{
-					mainCamera = &camera.Camera;
-					cameraTransform = &transform.Transform;
-					break;
+					nsc.Instance = nsc.InstantiateScript();
+					nsc.Instance->m_Entity = Entity { entity, this };
+					nsc.Instance->OnCreate();
 				}
+				nsc.Instance->OnUpdate(ts);
+			});
+			
+		//Render 2D sprites
+		auto group = m_Registry.view<TransformComponent, CameraComponent>();
+		for (auto entity : group)
+		{
+			auto [transform, camera] = group.get<TransformComponent, CameraComponent>(entity);
+
+			if (camera.Primary)
+			{
+				mainCamera = &camera.Camera;
+				cameraTransform = &transform.Transform;
+				break;
 			}
 		}
+		
 		if (mainCamera)
 		{
 			Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
