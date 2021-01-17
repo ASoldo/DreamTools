@@ -270,31 +270,31 @@ namespace DreamTools
 		ImGui::End();
 		//CUSTOM UI END
 
-		ImGui::Begin("Color:");
-		if (m_SquareEntity)
-		{
-			auto& tag = m_SquareEntity.GetComponent<TagComponent>().Tag;
-			ImGui::Text("%s", tag.c_str());
-			auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
-			ImGui::ColorEdit4("Square Color: ", glm::value_ptr(squareColor));
-		}
-		ImGui::DragFloat3("Camera Transform:",
-			glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
+		ImGui::Begin("General Info:");
+		//if (m_SquareEntity)
+		//{
+		//	auto& tag = m_SquareEntity.GetComponent<TagComponent>().Tag;
+		//	ImGui::Text("%s", tag.c_str());
+		//	auto& squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
+		//	ImGui::ColorEdit4("Square Color: ", glm::value_ptr(squareColor));
+		//}
+		//ImGui::DragFloat3("Camera Transform:",
+		//	glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
 
-		if (ImGui::Checkbox("Camera A", &m_PrimaryCamera))
+		if (ImGui::Checkbox("Toggle Camera", &m_PrimaryCamera))
 		{
 			m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
 			m_SecondCameraEntity.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
 		}
 
-		{
-			auto& camera = m_SecondCameraEntity.GetComponent<CameraComponent>().Camera;
-			float orthoSize = camera.GetOrthographicSize();
-			if (ImGui::DragFloat3("2nd Camera Otrho Size: ", &orthoSize))
-			{
-				camera.SetOrthographicSize(orthoSize);
-			}
-		}
+		//{
+		//	auto& camera = m_SecondCameraEntity.GetComponent<CameraComponent>().Camera;
+		//	float orthoSize = camera.GetOrthographicSize();
+		//	if (ImGui::DragFloat3("2nd Camera Otrho Size: ", &orthoSize))
+		//	{
+		//		camera.SetOrthographicSize(orthoSize);
+		//	}
+		//}
 
 
 		ImGui::End();

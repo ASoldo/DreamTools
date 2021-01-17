@@ -162,5 +162,15 @@ namespace DreamTools
 				ImGui::TreePop();
 			}
 		}
+
+		if (entity.HasComponent<SpriteRendererComponent>())
+		{
+			auto& color = entity.GetComponent<SpriteRendererComponent>().Color;
+			if (ImGui::TreeNodeEx((void*)typeid(SpriteRendererComponent).hash_code(), ImGuiTreeNodeFlags_DefaultOpen, "Sprite Renderer"))
+			{
+				ImGui::ColorEdit4("Tint", glm::value_ptr(color));
+				ImGui::TreePop();
+			}
+		}
 	}
 }
