@@ -61,7 +61,7 @@ namespace DreamTools
 	void Scene::OnUpdate(Timestep ts)
 	{
 		Camera* mainCamera = nullptr;
-		glm::mat4* cameraTransform = nullptr;
+		glm::mat4 cameraTransform;
 		
 		//Update Scripts
 			
@@ -85,19 +85,19 @@ namespace DreamTools
 			if (camera.Primary)
 			{
 				mainCamera = &camera.Camera;
-				cameraTransform = &transform.Transform;
+				cameraTransform = transform.GetTransform();
 				break;
 			}
 		}
 		
 		if (mainCamera)
 		{
-			Renderer2D::BeginScene(mainCamera->GetProjection(), *cameraTransform);
+			Renderer2D::BeginScene(mainCamera->GetProjection(), cameraTransform);
 			auto renderGroup = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 			for (auto entity : renderGroup)
 			{
 				auto [transform, sprite] = renderGroup.get<TransformComponent, SpriteRendererComponent>(entity);
-				Renderer2D::DrawQuad(transform, sprite.Color);
+				Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
 			}
 			Renderer2D::EndScene();
 		}
